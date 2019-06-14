@@ -1,27 +1,69 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View_Controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 
-/**
- * FXML Controller class
- *
- * @author annagallaher
- */
-public class AddModifyOutsourcedPartController implements Initializable {
+public class AddModifyOutsourcedPartController {
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+    @FXML
+    private Label addPart;
+
+    @FXML
+    private RadioButton inhousePartSelect;
+
+    @FXML
+    private RadioButton outsourcedPartSelect;
+
+    @FXML
+    private Button partSave;
+
+    @FXML
+    private TextField partId;
+
+    @FXML
+    private TextField partName;
+
+    @FXML
+    private TextField partInv;
+
+    @FXML
+    private TextField partPrice;
+
+    @FXML
+    private TextField partMin;
+
+    @FXML
+    private TextField partMax;
+
+    @FXML
+    private TextField partCompanyName;
+
+    @FXML
+    void inhousePartSelectHandler(MouseEvent event) {
+
+    }
+
+    @FXML
+    void outsourcedPartSelectHandler(MouseEvent event) {
+
+    }
+
+    @FXML
+    void partCancel(ActionEvent event) {
+
+    }
+
+    @FXML
+    void partCancelHandler(MouseEvent event) {
+
+    }
+
+    @FXML
+    void partSaveHandler(MouseEvent event) {
+
+    }
+
 }

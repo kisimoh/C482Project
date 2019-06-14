@@ -1,27 +1,87 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View_Controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
-/**
- * FXML Controller class
- *
- * @author annagallaher
- */
-public class MainScreenController implements Initializable {
+public class MainScreenController {
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+    @FXML
+    private Button searchParts;
+
+    @FXML
+    private Button addPartMain;
+
+    @FXML
+    private Button modifyPartMain;
+
+    @FXML
+    private Button deletePart;
+
+    @FXML
+    private TextField partsSearchBox;
+
+    @FXML
+    private Button addProductMain;
+
+    @FXML
+    private Button modifyProductMain;
+
+    @FXML
+    private Button deleteProduct;
+
+    @FXML
+    private Button searchProducts;
+
+    @FXML
+    private TextField productSearchBox;
+
+    @FXML
+    private Button exitApplication;
+
+    @FXML
+    void addPartMainHandler(MouseEvent event) {
+
+    }
+
+    @FXML
+    void addProductMainHandler(MouseEvent event) {
+
+    }
+
+    @FXML
+    void deletePartHandler(MouseEvent event) {
+
+    }
+
+    @FXML
+    void deleteProductHandler(MouseEvent event) {
+
+    }
+
+    @FXML
+    void exitApplicationHandler(MouseEvent event) {
+
+    }
+
+    @FXML
+    void mainModifyProductHandler(MouseEvent event) {
+
+    }
+
+    @FXML
+    void modifyPartMainHandler(MouseEvent event) {
+
+    }
+
+    @FXML
+    void searchPartsHandler(MouseEvent event) {
+
+    }
+
+    @FXML
+    void searchProductsHandler(MouseEvent event) {
+
+    }
+
 }
