@@ -12,43 +12,67 @@ package Model;
 public abstract class Part {
     
     //variables
-    public int partID;
+    private int partID;
     
-    public String name;
+    private String name;
     
-    public double price;
+    private double price;
     
-    public int inStock;
+    private int inStock;
     
-    public int min;
+    private int min;
     
-    public int max;
+    private int max;
     
     //methods
     
-    public void setName(String);
+    public void setName(String) {
+            this.name = name;
+    }
     
-    public String getName();
+    public String getName() {
+        return name
+    };
     
-    public void setPrice(double);
+    public void setPrice(double) {
+        this.price = price
+    };
     
-    public double getPrice;
+    public double getPrice() {
+        return price
+    };
     
-    public void setInStock(int);
+    public void setInStock(int) {
+        this.inStock = inStock
+    };
     
-    public int getInStock();
+    public int getInStock() {
+        return inStock
+    };
     
-    public void setMin(int);
+    public void setMin(int) {
+        this.min = min
+    };
     
-    public int getMin();
+    public int getMin() {
+        return min
+    };
     
-    public void setMax(int);
+    public void setMax(int) {
+        this.max = max
+    };
     
-    public int getMax();
+    public int getMax() {
+        return max
+    };
     
-    public void setPartID(int);
+    public void setPartID(int) {
+        this.partID = partID
+    };
     
-    public int getPartID();
+    public int getPartID() {
+        return partID
+    };
     
     
     

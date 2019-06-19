@@ -10,6 +10,8 @@ package Model;
  * @author annagallaher
  */
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Inventory {
   //variables
@@ -17,6 +19,12 @@ public class Inventory {
    public ArrayList<Product> products;
    
    public ArrayList<Part> allParts;
+   
+       // Observable list of parts in the inventory
+    private final static ObservableList<Part> allParts = FXCollections.observableArrayList();
+    
+    // Observable list of products in the inventory
+    private final static ObservableList<Product> products = FXCollections.observableArrayList();
     
     
  //methods

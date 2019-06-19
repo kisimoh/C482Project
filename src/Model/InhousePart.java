@@ -9,14 +9,20 @@ package Model;
  *
  * @author annagallaher
  */
-public class InhousePart {
+public class InhousePart extends Part{
     
     //variables
     
-      public int machineID;
+      private int machineID;
       
     //methods
       
-      public void setMachineID(int);
-      public int getMachineID();
+       public void setMachineID(int machineID) {
+        this.machineID = machineID;
+        
+        
+      public int getMachineID() {
+        return machineID;
+    }
+
 }

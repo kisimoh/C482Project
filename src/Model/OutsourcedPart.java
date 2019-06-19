@@ -9,14 +9,19 @@ package Model;
  *
  * @author annagallaher
  */
-public class OutsourcedPart {
+public class OutsourcedPart extends Part {
     
     // variables
-      public String companyName;
+      private String companyName;
       
     //methods
-      
-      public String getCompanyName();
-      
-      public void setCompanyName(String);
+          
+    public String getCompanyName() {
+        return companyName;
+     
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+
 }
+
+
