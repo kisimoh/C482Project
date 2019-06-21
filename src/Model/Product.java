@@ -15,13 +15,13 @@ import java.util.ArrayList;
 public class Product {
 
     // variable
-    public ArrayList<Part> associatedParts;
-    public int productID;
-    public string name;
-    public double price;
-    public int inStock;
-    public int min;
-    public int max;
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();;
+    private int productID;
+    private string name;
+    private double price;
+    private int inStock;
+    private int min;
+    private int max;
 
     // method
     public void turnOn() {
