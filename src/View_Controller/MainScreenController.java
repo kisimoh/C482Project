@@ -2,6 +2,8 @@ package View_Controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 public class MainScreenController {
@@ -19,6 +21,21 @@ public class MainScreenController {
     private Button deletePart;
 
     @FXML
+    private TableView<?> partsTable;
+
+    @FXML
+    private TableColumn<?, ?> partIDColumn;
+
+    @FXML
+    private TableColumn<?, ?> partNameColumn;
+
+    @FXML
+    private TableColumn<?, ?> partInventoryColumn;
+
+    @FXML
+    private TableColumn<?, ?> partPriceColumn;
+
+    @FXML
     private TextField partsSearchBox;
 
     @FXML
@@ -29,6 +46,21 @@ public class MainScreenController {
 
     @FXML
     private Button deleteProduct;
+
+    @FXML
+    private TableView<?> productsTable;
+
+    @FXML
+    private TableColumn<?, ?> productIDColumn;
+
+    @FXML
+    private TableColumn<?, ?> productNameColumn;
+
+    @FXML
+    private TableColumn<?, ?> productInventoryColumn;
+
+    @FXML
+    private TableColumn<?, ?> productPriceColumn;
 
     @FXML
     private Button searchProducts;
