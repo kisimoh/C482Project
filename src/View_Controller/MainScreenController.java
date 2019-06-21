@@ -6,7 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class MainScreenController {
+public class MainScreenController implements Initializable {
 
     @FXML
     private Button searchParts;
@@ -21,19 +21,19 @@ public class MainScreenController {
     private Button deletePart;
 
     @FXML
-    private TableView<?> partsTable;
+    private TableView<Part> mainPartsTable;
 
     @FXML
-    private TableColumn<?, ?> partIDColumn;
+    private TableColumn<Part, Integer> mainPartIDColumn;
 
     @FXML
-    private TableColumn<?, ?> partNameColumn;
+    private TableColumn<Part, String> mainPartNameColumn;
 
     @FXML
-    private TableColumn<?, ?> partInventoryColumn;
+    private TableColumn<Part, Integer> mainPartInventoryColumn;
 
     @FXML
-    private TableColumn<?, ?> partPriceColumn;
+    private TableColumn<Part, Double> mainPartPriceColumn;
 
     @FXML
     private TextField partsSearchBox;
@@ -48,19 +48,19 @@ public class MainScreenController {
     private Button deleteProduct;
 
     @FXML
-    private TableView<?> productsTable;
+    private TableView<Product> mainProductTable;
 
     @FXML
-    private TableColumn<?, ?> productIDColumn;
+    private TableColumn<Product, Integer> mainProductIDColumn;
 
     @FXML
-    private TableColumn<?, ?> productNameColumn;
+    private TableColumn<Product, String> mainProductNameColumn;
 
     @FXML
-    private TableColumn<?, ?> productInventoryColumn;
+    private TableColumn<Product, Integer> mainProductInventoryColumn;
 
     @FXML
-    private TableColumn<?, ?> productPriceColumn;
+    private TableColumn<Product, Double> mainProductPriceColumn;
 
     @FXML
     private Button searchProducts;
