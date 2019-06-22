@@ -31,9 +31,9 @@ public class Inventory {
     
     public void addProduct(product);
     
-    public boolean removeProduct(int);
+    public boolean deleteProduct(int);
     
-    public product lookupProduct(int);
+    public product getProduct(int);
     
     public void updateProduct(int);
     
@@ -41,7 +41,7 @@ public class Inventory {
     
     public boolean deletePart(part);
     
-    public part lookupPart(int);
+    public part getPart(int);
     
     public void updatePart(int);
     

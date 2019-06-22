@@ -11,7 +11,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 
-import 
+import Model.Part;
+import Model.Product;
+import Model.Inventory;
+import Model.Inventory.getPart;
+import Model.Inventory.getProduct;
 
 public class MainScreenController implements Initializable {
 
@@ -199,11 +203,11 @@ public class MainScreenController implements Initializable {
     }
     
     public void populatePartsTable(){
-        mainPartsTable.setItems(getParts());
+        mainPartsTable.setItems(getPart());
     }
    
     public void populateProductTable(){
-        mainProductTable.setItems(getProducts());
+        mainProductTable.setItems(getProduct());
     }
     
     public void setApp(Annastasia Gallaher - Inventory System mainApp){
