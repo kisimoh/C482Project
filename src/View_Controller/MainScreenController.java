@@ -13,9 +13,14 @@ import javafx.scene.control.ButtonType;
 
 import Model.Part;
 import Model.Product;
-import Model.Inventory;
-import Model.Inventory.getPart;
-import Model.Inventory.getProduct;
+import java.util.Optional;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class MainScreenController implements Initializable {
 
@@ -89,12 +94,12 @@ public class MainScreenController implements Initializable {
 
     @FXML
     void addPartMainHandler(ActionEvent event) throws IOException  {
-        showAddPartScreen(event);
+        openInhousePartScreen (event);
     }
 
     @FXML
     void addProductMainHandler(ActionEvent event) throws IOException  {
-        showProductsScreen(event);
+        openProductScreen(event);
     }
 
     @FXML
@@ -109,7 +114,7 @@ public class MainScreenController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.get() == ButtonType.OK) {
-            removePart(part.getPartID());
+            deletePart(part.getPartID());
             populatePartsTable();
     }
 }
@@ -184,13 +189,37 @@ public class MainScreenController implements Initializable {
     public MainScreenController(){
     }
  
+     public void openOutsourcedPartScreen(ActionEvent event) throws IOException {
+        Parent loader = FXMLLoader.load(getClass().getResource("AddModifyOutsourcedPart.fxml"));
+        Scene scene = new Scene(loader);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+     }
+    
+    public void openInhousePartScreen(ActionEvent event) throws IOException {
+        Parent loader = FXMLLoader.load(getClass().getResource("AddModifyInhousePart.fxml"));
+        Scene scene = new Scene(loader);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+     }
+    
+     public void openProductScreen(ActionEvent event) throws IOException {
+        Parent loader = FXMLLoader.load(getClass().getResource("AddModifyProduct.fxml"));
+        Scene scene = new Scene(loader);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+     }
+    
     public static Part getModPart() {
         return currentModPart;
     }
 
     
     public void setModifiedPart(Part modifyPart) {
-        MainScreenJavaController.currentModPart = modifyPart;
+        View_Controller.MainScreenController.currentModPart = modifyPart;
     }
     
 
@@ -199,7 +228,7 @@ public class MainScreenController implements Initializable {
     }
   
     public void setModifiedProduct(Product modifiedProduct) {
-        MainScreenJavaController.currentModProduct = modifiedProduct;
+        MainScreenController.currentModProduct = modifiedProduct;
     }
     
     public void populatePartsTable(){
@@ -210,9 +239,9 @@ public class MainScreenController implements Initializable {
         mainProductTable.setItems(getProduct());
     }
     
-    public void setApp(Annastasia Gallaher - Inventory System mainApp){
+    public void setApp(mainApp){
         populatePartsTable();
-        populateProductsTable;
+        populateProductsTable();
     }
    
 }

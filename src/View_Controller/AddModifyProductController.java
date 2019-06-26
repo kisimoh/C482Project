@@ -1,10 +1,17 @@
 package View_Controller;
 
+import Model.Part;
+import Model.Product;
+import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import static View_Controller.MainScreenController.getModifiedProduct;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class AddModifyProductController {
 
@@ -33,34 +40,34 @@ public class AddModifyProductController {
     private Button cancelProduct;
 
     @FXML
-    private TableView<?> addPartTable;
+    private TableView<Part> addPartTable;
 
     @FXML
-    private TableColumn<?, ?> addPartTablePartID;
+    private TableColumn<Part, Integer> addPartPartIDColumn;
 
     @FXML
-    private TableColumn<?, ?> addPartTablePartName;
+    private TableColumn<Part, String> addPartNameColumn;
 
     @FXML
-    private TableColumn<?, ?> addPartTableInventoryLevel;
+    private TableColumn<Part,Integer> addPartInventoryColumn;
 
     @FXML
-    private TableColumn<?, ?> addPartTablePrice;
+    private TableColumn<Part, Double> addPartPriceColumn;
 
     @FXML
-    private TableView<?> partDeleteTable;
+    private TableView<Part> partsContainedTable;
 
     @FXML
-    private TableColumn<?, ?> partDeleteTablePartID;
+    private TableColumn<Part, Integer> partsContainedPartIDColumn;
 
     @FXML
-    private TableColumn<?, ?> partDeleteTablePartName;
+    private TableColumn<Part, String> partsContainedPartNameColumn;
 
     @FXML
-    private TableColumn<?, ?> partDeleteTableInventoryLevel;
+    private TableColumn<Part, Integer> partsContainedInventoryColumn;
 
     @FXML
-    private TableColumn<?, ?> partDeleteTablePrice;
+    private TableColumn<Part, Double> partsContainedPriceColumn;
 
     @FXML
     private Button addPartToProduct;
@@ -73,29 +80,37 @@ public class AddModifyProductController {
 
     @FXML
     private TextField searchPartsField;
+    
+    private final ObservableList<Part> ProductParts = FXCollections.observableArrayList();
+    
+    private final Product currentModProduct;
+    
+    public AddModifyProductController() {
+        this.currentModProduct = getModifiedProduct();
+    }
 
     @FXML
-    void addPartToProductHandler(MouseEvent event) {
+    void addPartToProductHandler(ActionEvent event) throws IOException {
 
     }
 
     @FXML
-    void cancelProductHandler(MouseEvent event) {
+    void cancelProductHandler(ActionEvent event) throws IOException {
 
     }
 
     @FXML
-    void deletePartFromProductHandler(MouseEvent event) {
+    void deletePartFromProductHandler(ActionEvent event) throws IOException {
 
     }
 
     @FXML
-    void saveProductHandler(MouseEvent event) {
+    void saveProductHandler(ActionEvent event) throws IOException {
 
     }
 
     @FXML
-    void searchPartsButtonHandler(MouseEvent event) {
+    void searchPartsButtonHandler(ActionEvent event) throws IOException {
 
     }
 

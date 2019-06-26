@@ -9,41 +9,93 @@ package Model;
  *
  * @author annagallaher
  */
-import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import Model.Part.*;
+import Model.Product.*;
 
 public class Inventory {
   //variables
     
-   public ArrayList<Product> products;
-   
-   public ArrayList<Part> allParts;
-   
-       // Observable list of parts in the inventory
-    private final static ObservableList<Part> allParts = FXCollections.observableArrayList();
+private final static ObservableList<Part> partsList = FXCollections.observableArrayList();
     
-    // Observable list of products in the inventory
-    private final static ObservableList<Product> products = FXCollections.observableArrayList();
+private final static ObservableList<Product> productList = FXCollections.observableArrayList();
+
+//methods
     
+    public static void addProduct(Product newProduct) {
+        productList.add(newProduct);
+    }
     
- //methods
+    public boolean canDeleteProduct(Product product) {
+        return product.getProductPartsCount() == 0;
+    }
     
-    public void addProduct(product);
+    public static boolean deleteProduct(int productID){
+            for (Product g: productList){
+                if (g.getProductID() == productID) {
+                    productList.remove(g);
+                    return true;
+                }
+            }
+            return false;
+    }
     
-    public boolean deleteProduct(int);
+    public static ObservableList<Product> getProduct(){
+        return productList;
+    }
     
-    public product getProduct(int);
+    public static int getProductCount(){
+        return productList.size();
+    }
     
-    public void updateProduct(int);
+    public void updateProduct(Product updatedProduct) {
+        productList.set(updatedProduct.getProductID(), updatedProduct);
+    }
     
-    public void addPart(part);
+    public static Product lookupProduct (int productID) {
+        for (Product e: productList) {
+            if (e.getProductID() == productID) {
+                return e;
+            }
+        }
+        return null;
+    }
     
-    public boolean deletePart(part);
+    public void addPart(Part newPart) {
+        partsList.add(newPart);
+    }
     
-    public part getPart(int);
+    public static boolean deletePart(int PartID) {
+        for (Part f: partsList) {
+            if (f.getPartID() == partID) {
+                partsList.remove(f);
+                return true;
+            }
+        }
+        return false;
+    }
     
-    public void updatePart(int);
+    public static ObservableList<Part> getAllParts() {
+        return partsList;
+    }
+    
+    public static int getPartsCount() {
+        return partsList.size();
+    }
+    
+    public static void updatePart(Part updatedPart) {
+        partsList.set(updatedPart.getPartID(), updatedPart);
+    }
+    
+    public static Part lookupPart (int partID) {
+        for (Part d: partsList) {
+            if (d.getPartID() == partID) {
+                return d;
+            }
+        }
+        return null;
+    }
     
     
     

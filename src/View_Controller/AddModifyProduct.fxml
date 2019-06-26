@@ -30,18 +30,18 @@
       <Button fx:id="cancelProduct" layoutX="910.0" layoutY="528.0" mnemonicParsing="false" onMouseClicked="#cancelProductHandler" text="Cancel" />
       <TableView fx:id="addPartTable" layoutX="507.0" layoutY="78.0" prefHeight="169.0" prefWidth="495.0">
         <columns>
-          <TableColumn fx:id="addPartTablePartID" prefWidth="75.0" text="Part ID" />
-          <TableColumn fx:id="addPartTablePartName" prefWidth="182.0" text="Part Name" />
-            <TableColumn fx:id="addPartTableInventoryLevel" prefWidth="132.0" text="Inventory Level" />
-            <TableColumn fx:id="addPartTablePrice" minWidth="0.0" prefWidth="104.0" text="Price Per Unit" />
+          <TableColumn fx:id="addPartPartIDColumn" prefWidth="75.0" text="Part ID" />
+          <TableColumn fx:id="addPartNameColumn" prefWidth="182.0" text="Part Name" />
+            <TableColumn fx:id="addPartInventoryColumn" prefWidth="132.0" text="Inventory Level" />
+            <TableColumn fx:id="addPartPriceColumn" minWidth="0.0" prefWidth="104.0" text="Price Per Unit" />
         </columns>
       </TableView>
-      <TableView fx:id="partDeleteTable" layoutX="507.0" layoutY="305.0" prefHeight="169.0" prefWidth="495.0">
+      <TableView fx:id="partsContainedTable" layoutX="507.0" layoutY="305.0" prefHeight="169.0" prefWidth="495.0">
          <columns>
-            <TableColumn fx:id="partDeleteTablePartID" prefWidth="75.0" text="Part ID" />
-            <TableColumn fx:id="partDeleteTablePartName" prefWidth="182.0" text="Part Name" />
-            <TableColumn fx:id="partDeleteTableInventoryLevel" prefWidth="132.0" text="Inventory Level" />
-            <TableColumn fx:id="partDeleteTablePrice" minWidth="0.0" prefWidth="104.0" text="Price Per Unit" />
+            <TableColumn fx:id="partsContainedPartIDColumn" prefWidth="75.0" text="Part ID" />
+            <TableColumn fx:id="partsContainedPartNameColumn" prefWidth="182.0" text="Part Name" />
+            <TableColumn fx:id="partsContainedInventoryColumn" prefWidth="132.0" text="Inventory Level" />
+            <TableColumn fx:id="partsContainedPriceColumn" minWidth="0.0" prefWidth="104.0" text="Price Per Unit" />
          </columns>
       </TableView>
       <Button fx:id="addPartToProduct" layoutX="917.0" layoutY="258.0" mnemonicParsing="false" onMouseClicked="#addPartToProductHandler" text="Add" />
