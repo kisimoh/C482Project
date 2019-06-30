@@ -22,6 +22,12 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import static Model.Inventory.getAllParts;
+import static Model.Inventory.getProduct;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
+
 public class MainScreenController implements Initializable {
 
     @FXML
@@ -104,7 +110,7 @@ public class MainScreenController implements Initializable {
 
     @FXML
     void deletePartHandler(ActionEvent event) throws IOException  {
-        Part part = MainPartsTable.getSelectionModel().getSelectedItem();
+        Part part = mainPartsTable.getSelectionModel().getSelectedItem();
 
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.initModality(Modality.NONE);
@@ -121,7 +127,7 @@ public class MainScreenController implements Initializable {
     
     @FXML
     void deleteProductHandler(ActionEvent event) throws IOException  {
-        Product product = MainProductTable.getSelectionModel().getSelectedItem();
+        Product product = mainProductTable.getSelectionModel().getSelectedItem();
 
         if (!canDeleteProduct(product)) {
             Alert alert = new Alert(AlertType.INFORMATION);
@@ -162,16 +168,16 @@ public class MainScreenController implements Initializable {
 
     @FXML
     void mainModifyProductHandler(ActionEvent event) throws IOException  {
-        modifiedPart = MainPartsTable.getSelectionModel().getSelectedItem();
-        setModifiedPart(modifiedPart);
-        showPartsScreen(event);
+        currentModPart = mainPartsTable.getSelectionModel().getSelectedItem();
+        setModifiedPart(currentModPart);
+        openPartScreen(event);
     }
 
     @FXML
     void modifyPartMainHandler(ActionEvent event) throws IOException  {
-        modifiedProduct = MainProductTable.getSelectionModel().getSelectedItem();
-        setModifiedProduct(modifiedProduct);
-        showProductScreen(event);
+        currentModProduct = mainProductTable.getSelectionModel().getSelectedItem();
+        setModifiedProduct(currentModProduct);
+        openProductScreen(event);
             
     }
 
@@ -184,26 +190,18 @@ public class MainScreenController implements Initializable {
     void searchProductsHandler(ActionEvent event) throws IOException  {
 
     }
-//constructor
     
     public MainScreenController(){
     }
  
-     public void openOutsourcedPartScreen(ActionEvent event) throws IOException {
-        Parent loader = FXMLLoader.load(getClass().getResource("AddModifyOutsourcedPart.fxml"));
+     public void openPartScreen(ActionEvent event) throws IOException {
+        Parent loader = FXMLLoader.load(getClass().getResource("AddModifyPart.fxml"));
         Scene scene = new Scene(loader);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
      }
-    
-    public void openInhousePartScreen(ActionEvent event) throws IOException {
-        Parent loader = FXMLLoader.load(getClass().getResource("AddModifyInhousePart.fxml"));
-        Scene scene = new Scene(loader);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
-     }
+   
     
      public void openProductScreen(ActionEvent event) throws IOException {
         Parent loader = FXMLLoader.load(getClass().getResource("AddModifyProduct.fxml"));
@@ -232,7 +230,7 @@ public class MainScreenController implements Initializable {
     }
     
     public void populatePartsTable(){
-        mainPartsTable.setItems(getPart());
+        mainPartsTable.setItems(getAllParts());
     }
    
     public void populateProductTable(){
@@ -242,6 +240,11 @@ public class MainScreenController implements Initializable {
     public void setApp(mainApp){
         populatePartsTable();
         populateProductsTable();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
    
 }
