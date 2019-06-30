@@ -18,12 +18,12 @@
             <Label layoutX="68.0" layoutY="200.0" prefHeight="23.0" prefWidth="91.0" text="Price/Cost" />
             <Label layoutX="68.0" layoutY="241.0" prefHeight="23.0" prefWidth="91.0" text="Min" />
             <Label layoutX="315.0" layoutY="241.0" prefHeight="23.0" prefWidth="61.0" text="Max" />
-            <TextField fx:id="productID" layoutX="178.0" layoutY="77.0" />
-            <TextField fx:id="productName" layoutX="178.0" layoutY="116.0" />
-            <TextField fx:id="productInventory" layoutX="178.0" layoutY="159.0" />
-            <TextField fx:id="productPrice" layoutX="178.0" layoutY="198.0" />
-            <TextField fx:id="productMin" layoutX="178.0" layoutY="239.0" prefHeight="27.0" prefWidth="91.0" />
-            <TextField fx:id="productMax" layoutX="366.0" layoutY="239.0" prefHeight="27.0" prefWidth="91.0" />
+            <TextField fx:id="productIDField" layoutX="178.0" layoutY="77.0" />
+            <TextField fx:id="productNameField" layoutX="178.0" layoutY="116.0" />
+            <TextField fx:id="productInventoryField" layoutX="178.0" layoutY="159.0" />
+            <TextField fx:id="productPriceField" layoutX="178.0" layoutY="198.0" />
+            <TextField fx:id="productMinField" layoutX="178.0" layoutY="239.0" prefHeight="27.0" prefWidth="91.0" />
+            <TextField fx:id="productMaxField" layoutX="366.0" layoutY="239.0" prefHeight="27.0" prefWidth="91.0" />
          </children>
       </AnchorPane>
       <Button fx:id="saveProduct" layoutX="836.0" layoutY="528.0" mnemonicParsing="false" onMouseClicked="#saveProductHandler" text="Save" />

@@ -10,7 +10,7 @@
    <children>
       <AnchorPane id="AnchorPane" layoutY="10.0" prefHeight="380.0" prefWidth="600.0">
          <children>
-            <Label fx:id="addPart" layoutX="22.0" layoutY="29.0" prefHeight="23.0" prefWidth="91.0" text="Add Part " />
+            <Label fx:id="screenLabel" layoutX="22.0" layoutY="29.0" prefHeight="23.0" prefWidth="91.0" text="Add Part " />
             <RadioButton fx:id="inhousePartSelect" layoutX="145.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#inhousePartSelectHandler" text="In-House" />
             <RadioButton fx:id="outsourcedPartSelect" layoutX="331.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#outsourcedPartSelectHandler" text="OutSourced" />
             <Label layoutX="68.0" layoutY="79.0" prefHeight="23.0" prefWidth="91.0" text="ID" />
@@ -19,16 +19,16 @@
             <Label layoutX="68.0" layoutY="200.0" prefHeight="23.0" prefWidth="91.0" text="Price/Cost" />
             <Label layoutX="68.0" layoutY="241.0" prefHeight="23.0" prefWidth="91.0" text="Min" />
             <Label layoutX="315.0" layoutY="241.0" prefHeight="23.0" prefWidth="61.0" text="Max" />
-            <Label layoutX="68.0" layoutY="282.0" prefHeight="23.0" prefWidth="104.0" text="Company Name" />
+            <Label fx:id="partsFlexFieldLabel" layoutX="68.0" layoutY="282.0" prefHeight="23.0" prefWidth="104.0" text="Company Name" />
             <Button fx:id="partSave" layoutX="353.0" layoutY="333.0" mnemonicParsing="false" onMouseClicked="#partSaveHandler" text="Save" />
             <Button layoutX="427.0" layoutY="333.0" mnemonicParsing="false" onAction="#partCancel" onMouseClicked="#partCancelHandler" text="Cancel" />
-            <TextField fx:id="partId" layoutX="178.0" layoutY="77.0" />
-            <TextField fx:id="partName" layoutX="178.0" layoutY="116.0" />
-            <TextField fx:id="partInv" layoutX="178.0" layoutY="159.0" />
-            <TextField fx:id="partPrice" layoutX="178.0" layoutY="198.0" />
-            <TextField fx:id="partMin" layoutX="178.0" layoutY="239.0" prefHeight="27.0" prefWidth="91.0" />
-            <TextField fx:id="partMax" layoutX="366.0" layoutY="239.0" prefHeight="27.0" prefWidth="91.0" />
-            <TextField fx:id="partCompanyName" layoutX="179.0" layoutY="280.0" />
+            <TextField fx:id="partIdField" layoutX="178.0" layoutY="77.0" />
+            <TextField fx:id="partNameField" layoutX="178.0" layoutY="116.0" />
+            <TextField fx:id="partInventoryField" layoutX="178.0" layoutY="159.0" />
+            <TextField fx:id="partPriceField" layoutX="178.0" layoutY="198.0" />
+            <TextField fx:id="partMinField" layoutX="178.0" layoutY="239.0" prefHeight="27.0" prefWidth="91.0" />
+            <TextField fx:id="partMaxField" layoutX="366.0" layoutY="239.0" prefHeight="27.0" prefWidth="91.0" />
+            <TextField fx:id="partFlexField" layoutX="179.0" layoutY="280.0" />
          </children>
       </AnchorPane>
    </children>
