@@ -17,7 +17,7 @@ import javax.xml.bind.ValidationException;
 public class Product {
 
     // variable
-    private ObservableList<Part> productParts = FXCollections.observableArrayList();;
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();;
     private int productID;
     private String name;
     private double price;
@@ -79,20 +79,20 @@ public class Product {
         this.productID = productID;
     }
     
-     public ObservableList<Part> getProductParts() {
-        return productParts;
+     public ObservableList<Part> getAssociatedParts() {
+        return associatedParts;
     }
     
-    public void addProductParts(Part productParts) {
-        this.productParts.add(productParts);
+    public void addAssociatedParts(Part associatedParts) {
+        this.associatedParts.add(associatedParts);
     }
     
-    public int getProductPartsCount() {
-        return productParts.size();
+    public int getAssociatedPartsCount() {
+        return associatedParts.size();
     }
     
-    public Part lookupProductParts(int partID) {
-        for (Part a: productParts) {
+    public Part lookupAssociatedParts(int partID) {
+        for (Part a: associatedParts) {
             if (a.getPartID() == partID) {
                 return a;
             }
@@ -100,14 +100,14 @@ public class Product {
             return null;
     }
     
-    public void removeAllProductParts() {
-        productParts = FXCollections.observableArrayList();
+    public void removeAllAssociatedParts() {
+        associatedParts = FXCollections.observableArrayList();
     }
     
-    public boolean removeProductParts(int partID) {
-        for (Part b: productParts) {
+    public boolean removeAssociatedParts(int partID) {
+        for (Part b: associatedParts) {
             if (b.getPartID() == partID) {
-                productParts.remove(b);
+                associatedParts.remove(b);
                 return true;
             }
         }
@@ -118,7 +118,7 @@ public class Product {
         
         double totalPartsPrice = 0.00;
         
-        for (Part c: getProductParts()){
+        for (Part c: getAssociatedParts()){
             totalPartsPrice += c.getPrice();
         }
         
@@ -146,8 +146,8 @@ public class Product {
             throw new ValidationException("Minimum inventory cannot exceed maximum. Please enter a valid minimum inventory level.");
         }
         
-        if getProductParts() < 1 {
-            throw new ValidaqtionException("Products must contain a minimum of 1 part. Please add a part.")
+        if (getAssociatedPartsCount() < 2) {
+            throw new ValidationException("Products must contain a minimum of 1 part. Please add a part.");
         }
         
         if (getInStock() < getMin() || getInStock() > getMax()) {

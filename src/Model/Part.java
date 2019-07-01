@@ -30,53 +30,53 @@ public abstract class Part {
     }
     //methods
     
-    public void setName(String) {
+    public void setName(String name) {
             this.name = name;
     }
     
     public String getName() {
-        return name
-    };
+        return name;
+    }
     
-    public void setPrice(double) {
-        this.price = price
-    };
+    public void setPrice(double price) {
+        this.price = price;
+    }
     
     public double getPrice() {
-        return price
-    };
+        return price;
+    }
     
-    public void setInStock(int) {
-        this.inStock = inStock
-    };
+    public void setInStock(int inStock) {
+        this.inStock = inStock;
+    }
     
     public int getInStock() {
-        return inStock
-    };
+        return inStock;
+    }
     
-    public void setMin(int) {
-        this.min = min
-    };
+    public void setMin(int min) {
+        this.min = min;
+    }
     
     public int getMin() {
-        return min
-    };
+        return min;
+    }
     
-    public void setMax(int) {
-        this.max = max
-    };
+    public void setMax(int max) {
+        this.max = max;
+    }
     
     public int getMax() {
-        return max
-    };
+        return max;
+    }
     
-    public void setPartID(int) {
-        this.partID = partID
-    };
+    public void setPartID(int partID) {
+        this.partID = partID;
+    }
     
     public int getPartID() {
-        return partID
-    };
+        return partID;
+    }
     
     public boolean isValid() throws ValidationException {
      

@@ -18,10 +18,11 @@ public class OutsourcedPart extends Part {
           
     public String getCompanyName() {
         return companyName;
-     
+    }
+        
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
-
+    }
 }
 
 

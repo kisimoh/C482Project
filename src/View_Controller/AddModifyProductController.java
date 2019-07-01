@@ -186,16 +186,16 @@ public class AddModifyProductController implements Initializable {
         newProduct.setMax(Integer.parseInt(productMax));
         
         if (currentModProduct != null) {
-            currentModProduct.removeAllProductParts();
+            currentModProduct.removeAllAssociatedParts();
         }
         
         for (Part h: productParts) {
-            newProduct.addProductParts(h);
+            newProduct.addAssociatedParts(h);
         }
         
         try {
             newProduct.isValid();
-        }
+        
         
             if (currentModProduct == null) {
                 newProduct.setProductID(Inventory.getProductCount());
@@ -212,7 +212,7 @@ public class AddModifyProductController implements Initializable {
             window.setScene(scene);
             window.show();
             
-        
+        }
             catch (ValidationException i) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error Validating Product");
@@ -230,7 +230,7 @@ public class AddModifyProductController implements Initializable {
         if (searchedPart != null) {
             ObservableList<Part> filteredPartsList = FXCollections.observableArrayList();
             filteredPartsList.add(searchedPart);
-            ProductAllPartsTable.setItems(filteredPartsList);
+            partsContainedTable.setItems(filteredPartsList);
         }
         else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -257,9 +257,9 @@ public class AddModifyProductController implements Initializable {
             productInventoryField.setText(Integer.toString(currentModProduct.getInStock()));
             productPriceField.setText(Double.toString(currentModProduct.getPrice()));
             productMinField.setText(Integer.toString(currentModProduct.getMin()));
-            productMaxField.setText(Integer.toString(currentModProduct.getMax())):
+            productMaxField.setText(Integer.toString(currentModProduct.getMax()));
             
-            productParts = currentModProduct.getProductParts();
+            productParts = currentModProduct.getAssociatedParts();
         }
         
         addPartPartIDColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPartID()).asObject());

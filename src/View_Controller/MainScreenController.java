@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import static Model.Inventory.getAllParts;
 import static Model.Inventory.getProduct;
 import static Model.Inventory.canDeleteProduct;
+import static Model.Inventory.deletePart;
 import static Model.Inventory.deleteProduct;
 import java.net.URL;
 import java.util.ResourceBundle;

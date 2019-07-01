@@ -4,15 +4,16 @@ import Model.InhousePart;
 import Model.Inventory;
 import Model.OutsourcedPart;
 import Model.Part;
+import static View_Controller.MainScreenController.getModPart;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import static View_Controller.MainScreenController.getModifiedPart;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Optional;
-import java.util.jar.Attributes.Name;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -68,7 +69,7 @@ public class AddModifyPartController implements Initializable {
     private final Part modPart;
     
     public AddModifyPartController() {
-        this.modPart = getModifiedPart();
+        this.modPart = getModPart();
     }
   
     @FXML
@@ -128,7 +129,7 @@ public class AddModifyPartController implements Initializable {
            modPart.setInStock(Integer.parseInt(partInv));
            modPart.setMin(Integer.parseInt(partMin));
            modPart.setMax(Integer.parseInt(partMax));
-           modPart.setMachineID(partFlex);
+           modPart.setMachineID(Integer.parseInt(partFlex));
             
            try {
                modPart.isValid();
@@ -163,7 +164,7 @@ public class AddModifyPartController implements Initializable {
            modPart.setInStock(Integer.parseInt(partInv));
            modPart.setMin(Integer.parseInt(partMin));
            modPart.setMax(Integer.parseInt(partMax));
-           modPart.setMachineID(partFlex);
+           modPart.setCompanyName(partFlex);
            }
          
         try {
@@ -193,18 +194,19 @@ public class AddModifyPartController implements Initializable {
             
         }
         
+    @Override
         public void initialize(URL url, ResourceBundle rb) {
             if (modPart == null) {
                 screenLabel.setText("Add Part");
                 int partAutoID = Inventory.getPartsCount();
-                partIDField.setText("AUTO GEN: " + partAutoID);
+                partIdField.setText("AUTO GEN: " + partAutoID);
                 
                 isInHouse = true;
                 partFlexFieldLabel.setText("Machine ID");
             }
             else {
               screenLabel.setText("ModifyPart");
-              partIDField.setText(Integer.toString(modPart.getPartID()));
+              partIdField.setText(Integer.toString(modPart.getPartID()));
               partNameField.setText(modPart.getName());
               partInventoryField.setText(Integer.toString(modPart.getInStock()));
               partPriceField.setText(Double.toString(modPart.getPrice()));
