@@ -11,7 +11,7 @@
    <children>
       <AnchorPane id="AnchorPane" layoutY="57.0" prefHeight="380.0" prefWidth="522.0">
          <children>
-            <Label layoutX="22.0" layoutY="29.0" prefHeight="23.0" prefWidth="91.0" text="Add Product" />
+            <Label fx:id="ProductPageLabel" layoutX="22.0" layoutY="29.0" prefHeight="23.0" prefWidth="91.0" text="Add Product" />
             <Label layoutX="68.0" layoutY="79.0" prefHeight="23.0" prefWidth="91.0" text="ID" />
             <Label layoutX="68.0" layoutY="118.0" prefHeight="23.0" prefWidth="91.0" text="Name" />
             <Label layoutX="68.0" layoutY="161.0" prefHeight="23.0" prefWidth="91.0" text="Inv" />

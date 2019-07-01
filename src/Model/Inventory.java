@@ -27,7 +27,7 @@ private final static ObservableList<Product> productList = FXCollections.observa
         productList.add(newProduct);
     }
     
-    public boolean canDeleteProduct(Product product) {
+    public static boolean canDeleteProduct(Product product) {
         return product.getProductPartsCount() == 0;
     }
     

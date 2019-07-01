@@ -1,5 +1,6 @@
 package View_Controller;
 
+import Extras.AppLoader;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
@@ -24,8 +25,13 @@ import javafx.stage.Stage;
 
 import static Model.Inventory.getAllParts;
 import static Model.Inventory.getProduct;
+import static Model.Inventory.canDeleteProduct;
+import static Model.Inventory.deleteProduct;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.Initializable;
 
 public class MainScreenController implements Initializable {
@@ -100,7 +106,7 @@ public class MainScreenController implements Initializable {
 
     @FXML
     void addPartMainHandler(ActionEvent event) throws IOException  {
-        openInhousePartScreen (event);
+        openPartScreen(event);
     }
 
     @FXML
@@ -144,7 +150,7 @@ public class MainScreenController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
 
             if (result.get() == ButtonType.OK) {
-                removeProduct(product.getProductID());
+                deleteProduct(product.getProductID());
                 populatePartsTable();
     }
 }
@@ -237,14 +243,30 @@ public class MainScreenController implements Initializable {
         mainProductTable.setItems(getProduct());
     }
     
-    public void setApp(mainApp){
+    public void setApp(AppLoader mainApp){
         populatePartsTable();
-        populateProductsTable();
+       populateProductTable();
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void initialize(URL url, ResourceBundle rb) { 
+        setModifiedPart(null);
+        setModifiedProduct(null);
+        
+        mainPartIDColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPartID()).asObject());
+        mainPartNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        mainPartInventoryColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getInStock()).asObject());
+        mainPartPriceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrice()).asObject());
+        
+        mainProductIDColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getProductID()).asObject());
+        mainProductNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        mainProductInventoryColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getInStock()).asObject());
+        mainProductPriceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrice()).asObject());
+        
+        populatePartsTable();
+        populateProductTable();   
+        
+        
     }
    
 }

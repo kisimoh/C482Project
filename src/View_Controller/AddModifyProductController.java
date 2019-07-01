@@ -1,5 +1,6 @@
 package View_Controller;
 
+import Model.Inventory;
 import Model.Part;
 import Model.Product;
 import java.io.IOException;
@@ -10,7 +11,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import static View_Controller.MainScreenController.getModifiedProduct;
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -20,10 +26,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.xml.bind.ValidationException;
 
 public class AddModifyProductController implements Initializable {
+    
+    @FXML
+    private Label ProductPageLabel;
 
     @FXML
     private TextField productIDField;
@@ -91,19 +102,28 @@ public class AddModifyProductController implements Initializable {
     @FXML
     private TextField searchPartsField;
     
-    private final ObservableList<Part> productParts = FXCollections.observableArrayList();
+    private ObservableList<Part> productParts = FXCollections.observableArrayList();
     
     private final Product currentModProduct;
     
     public AddModifyProductController() {
         this.currentModProduct = getModifiedProduct();
     }
+    
+    public void populateAvailablePartsTable() {
+        partsContainedTable.setItems(Inventory.getAllParts());
+        
+    }
 
+    public void populateCurrentPartsTable() {
+        addPartTable.setItems(productParts);
+    }
+    
     @FXML
     void addPartToProductHandler(ActionEvent event) throws IOException {
         Part part = addPartTable.getSelectionModel().getSelectedItem();
         productParts.add(part);
-        populatePartsContainedTable();
+        populateCurrentPartsTable();
     }
 
     @FXML
@@ -112,7 +132,7 @@ public class AddModifyProductController implements Initializable {
         alert.initModality(Modality.NONE);
         alert.setTitle("Cancel Modifying Product");
         alert.setHeaderText("Please confirm cancelling modifying product.");
-        alert.setContentText("Please confirm you want to cancel update to product " + ProductNameField.getText() + ".");
+        alert.setContentText("Please confirm you want to cancel update to product " + productNameField.getText() + ".");
         Optional<ButtonType> result = alert.showAndWait();
         
         if (result.get() == ButtonType.OK) {
@@ -151,7 +171,7 @@ public class AddModifyProductController implements Initializable {
     }
 
     @FXML
-    void saveProductHandler(ActionEvent event) throws IOException {
+    void saveProductHandler(ActionEvent event) throws IOException, ValidationException {
         String productName = productNameField.getText();
         String productInventory = productInventoryField.getText();
         String productPrice = productPriceField.getText();
@@ -166,13 +186,99 @@ public class AddModifyProductController implements Initializable {
         newProduct.setMax(Integer.parseInt(productMax));
         
         if (currentModProduct != null) {
-            currentModProduct.
+            currentModProduct.removeAllProductParts();
         }
+        
+        for (Part h: productParts) {
+            newProduct.addProductParts(h);
+        }
+        
+        try {
+            newProduct.isValid();
+        }
+        
+            if (currentModProduct == null) {
+                newProduct.setProductID(Inventory.getProductCount());
+                Inventory.addProduct(newProduct);
+            }
+            else {
+                newProduct.setProductID(currentModProduct.getProductID());
+                Inventory.updateProduct(newProduct);
+            }
+            
+            Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Scene scene = new Scene(loader);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();
+            
+        
+            catch (ValidationException i) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error Validating Product");
+                alert.setHeaderText("Product not valid");
+                alert.setContentText(i.getMessage());
+                alert.showAndWait();
+        }   
     }
 
     @FXML
-    void searchPartsButtonHandler(ActionEvent event) throws IOException {
-
+    void searchPartsButtonHandler (ActionEvent event) throws IOException {
+        String partsSearchIDString = searchPartsField.getText();
+        Part searchedPart = Inventory.lookupPart(Integer.parseInt(partsSearchIDString));
+        
+        if (searchedPart != null) {
+            ObservableList<Part> filteredPartsList = FXCollections.observableArrayList();
+            filteredPartsList.add(searchedPart);
+            ProductAllPartsTable.setItems(filteredPartsList);
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error Searching");
+            alert.setHeaderText("Part not found in inventory.");
+            alert.setContentText("The part searched for does not match any current part in Inventory!");
+            alert.showAndWait();
+        }
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        if (currentModProduct == null) {
+            ProductPageLabel.setText("Add Product");
+            int productAutoID = Inventory.getProductCount();
+            productIDField.setText("AUTO GEN: " + productAutoID);
+            System.out.println("Here");
+        }
+        else {
+            ProductPageLabel.setText("Modify Product");
+            
+            productIDField.setText(Integer.toString(currentModProduct.getProductID()));
+            productNameField.setText(currentModProduct.getName());
+            productInventoryField.setText(Integer.toString(currentModProduct.getInStock()));
+            productPriceField.setText(Double.toString(currentModProduct.getPrice()));
+            productMinField.setText(Integer.toString(currentModProduct.getMin()));
+            productMaxField.setText(Integer.toString(currentModProduct.getMax())):
+            
+            productParts = currentModProduct.getProductParts();
+        }
+        
+        addPartPartIDColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPartID()).asObject());
+        addPartNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        addPartInventoryColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getInStock()).asObject());
+        addPartPriceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrice()).asObject());
+        
+        partsContainedPartIDColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPartID()).asObject());
+        partsContainedPartNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        partsContainedInventoryColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getInStock()).asObject());
+        partsContainedPriceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrice()).asObject());
+        
+       
+        populateAvailablePartsTable();
+        populateCurrentPartsTable();
+        
+      
+    }
+
+    
 }
+

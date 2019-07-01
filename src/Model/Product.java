@@ -10,7 +10,6 @@ package Model;
  * @author annagallaher
  */
 
-import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.xml.bind.ValidationException;
