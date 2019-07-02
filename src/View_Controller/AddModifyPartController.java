@@ -204,7 +204,7 @@ public class AddModifyPartController implements Initializable {
                 isInHouse = true;
                 partFlexFieldLabel.setText("Machine ID");
             }
-            else {
+            else{
               screenLabel.setText("ModifyPart");
               partIdField.setText(Integer.toString(modPart.getPartID()));
               partNameField.setText(modPart.getName());

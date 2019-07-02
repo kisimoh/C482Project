@@ -177,14 +177,14 @@ public class MainScreenController implements Initializable {
     void mainModifyProductHandler(ActionEvent event) throws IOException  {
         currentModPart = mainPartsTable.getSelectionModel().getSelectedItem();
         setModifiedPart(currentModPart);
-        openPartScreen(event);
+        openProductScreen(event);
     }
 
     @FXML
     void modifyPartMainHandler(ActionEvent event) throws IOException  {
         currentModProduct = mainProductTable.getSelectionModel().getSelectedItem();
         setModifiedProduct(currentModProduct);
-        openProductScreen(event);
+        openPartScreen(event);
             
     }
 
