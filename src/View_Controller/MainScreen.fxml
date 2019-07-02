@@ -12,10 +12,10 @@
 <AnchorPane id="AnchorPane" prefHeight="426.0" prefWidth="1107.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.MainScreenController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="303.0" layoutX="18.0" layoutY="70.0" stroke="BLACK" strokeLineJoin="BEVEL" strokeType="OUTSIDE" strokeWidth="2.0" width="529.0" />
-      <Button fx:id="searchParts" layoutX="298.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#searchPartsHandler" text="Search" />
-      <Button fx:id="addPartMain" layoutX="171.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#addPartMainHandler" text="Add" />
-      <Button fx:id="modifyPartMain" layoutX="296.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#modifyPartMainHandler" text="Modify" />
-      <Button fx:id="deletePart" layoutX="451.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#deletePartHandler" text="Delete" />
+      <Button fx:id="searchParts" layoutX="298.0" layoutY="81.0" mnemonicParsing="false" onAction="#searchPartsHandler" text="Search" />
+      <Button fx:id="addPartMain" layoutX="171.0" layoutY="334.0" mnemonicParsing="false" onAction="#addPartMainHandler" text="Add" />
+      <Button fx:id="modifyPartMain" layoutX="296.0" layoutY="334.0" mnemonicParsing="false" onAction="#modifyPartMainHandler" text="Modify" />
+      <Button fx:id="deletePart" layoutX="451.0" layoutY="334.0" mnemonicParsing="false" onAction="#deletePartHandler" text="Delete" />
       <TableView fx:id="mainPartsTable" layoutX="31.0" layoutY="122.0" prefHeight="199.0" prefWidth="503.0">
         <columns>
           <TableColumn fx:id="mainPartIDColumn" prefWidth="72.0" text="Part ID" />
@@ -31,9 +31,9 @@
             <Font name="System Bold" size="18.0" />
          </font></Label>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="303.0" layoutX="561.0" layoutY="70.0" stroke="BLACK" strokeLineJoin="BEVEL" strokeType="OUTSIDE" strokeWidth="2.0" width="529.0" />
-      <Button fx:id="addProductMain" layoutX="714.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#addProductMainHandler" text="Add" />
-      <Button fx:id="modifyProductMain" layoutX="839.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#mainModifyProductHandler" text="Modify" />
-      <Button fx:id="deleteProduct" layoutX="994.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#deleteProductHandler" text="Delete" />
+      <Button fx:id="addProductMain" layoutX="714.0" layoutY="334.0" mnemonicParsing="false" onAction="#addProductMainHandler" text="Add" />
+      <Button fx:id="modifyProductMain" layoutX="839.0" layoutY="334.0" mnemonicParsing="false" onAction="#mainModifyProductHandler" text="Modify" />
+      <Button fx:id="deleteProduct" layoutX="994.0" layoutY="334.0" mnemonicParsing="false" onAction="#deleteProductHandler" text="Delete" />
       <TableView fx:id="mainProductTable" layoutX="570.0" layoutY="122.0" prefHeight="199.0" prefWidth="503.0">
          <columns>
             <TableColumn fx:id="mainProductIDColumn" prefWidth="118.0" text="Product ID" />
@@ -43,8 +43,8 @@
          </columns>
       </TableView>
       <Label layoutX="580.0" layoutY="86.0" prefHeight="17.0" prefWidth="79.0" text="Products" />
-      <Button fx:id="searchProducts" layoutX="839.0" layoutY="81.0" mnemonicParsing="false" onMouseClicked="#searchProductsHandler" text="Search" />
+      <Button fx:id="searchProducts" layoutX="839.0" layoutY="81.0" mnemonicParsing="false" onAction="#searchProductsHandler" text="Search" />
       <TextField fx:id="productSearchBox" layoutX="908.0" layoutY="81.0" />
-      <Button fx:id="exitApplication" layoutX="994.0" layoutY="385.0" mnemonicParsing="false" onMouseClicked="#exitApplicationHandler" prefHeight="27.0" prefWidth="58.0" text="Exit" />
+      <Button fx:id="exitApplication" layoutX="994.0" layoutY="385.0" mnemonicParsing="false" onAction="#exitApplicationHandler" prefHeight="27.0" prefWidth="58.0" text="Exit" />
    </children>
 </AnchorPane>

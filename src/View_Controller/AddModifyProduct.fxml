@@ -26,8 +26,8 @@
             <TextField fx:id="productMaxField" layoutX="366.0" layoutY="239.0" prefHeight="27.0" prefWidth="91.0" />
          </children>
       </AnchorPane>
-      <Button fx:id="saveProduct" layoutX="836.0" layoutY="528.0" mnemonicParsing="false" onMouseClicked="#saveProductHandler" text="Save" />
-      <Button fx:id="cancelProduct" layoutX="910.0" layoutY="528.0" mnemonicParsing="false" onMouseClicked="#cancelProductHandler" text="Cancel" />
+      <Button fx:id="saveProduct" layoutX="836.0" layoutY="528.0" mnemonicParsing="false" onAction="#saveProductHandler" text="Save" />
+      <Button fx:id="cancelProduct" layoutX="910.0" layoutY="528.0" mnemonicParsing="false" onAction="#cancelProductHandler" text="Cancel" />
       <TableView fx:id="addPartTable" layoutX="507.0" layoutY="78.0" prefHeight="169.0" prefWidth="495.0">
         <columns>
           <TableColumn fx:id="addPartPartIDColumn" prefWidth="75.0" text="Part ID" />
@@ -44,9 +44,9 @@
             <TableColumn fx:id="partsContainedPriceColumn" minWidth="0.0" prefWidth="104.0" text="Price Per Unit" />
          </columns>
       </TableView>
-      <Button fx:id="addPartToProduct" layoutX="917.0" layoutY="258.0" mnemonicParsing="false" onMouseClicked="#addPartToProductHandler" text="Add" />
-      <Button fx:id="deletePartFromProduct" layoutX="910.0" layoutY="488.0" mnemonicParsing="false" onMouseClicked="#deletePartFromProductHandler" text="Delete" />
-      <Button fx:id="searchPartsButton" layoutX="708.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#searchPartsButtonHandler" text="Search" />
+      <Button fx:id="addPartToProduct" layoutX="917.0" layoutY="258.0" mnemonicParsing="false" onAction="#addPartToProductHandler" text="Add" />
+      <Button fx:id="deletePartFromProduct" layoutX="910.0" layoutY="488.0" mnemonicParsing="false" onAction="#deletePartFromProductHandler" text="Delete" />
+      <Button fx:id="searchPartsButton" layoutX="708.0" layoutY="30.0" mnemonicParsing="false" onAction="#searchPartsButtonHandler" text="Search" />
       <TextField fx:id="searchPartsField" layoutX="778.0" layoutY="31.0" prefHeight="27.0" prefWidth="224.0" />
    </children>
 </AnchorPane>
