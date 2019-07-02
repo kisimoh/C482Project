@@ -16,7 +16,7 @@ public class AppLoader extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(AppLoader.class.getResource("AnnastasiaGallaherInventorySystem/View_Controller/MainScreen.fxml"));
+        loader.setLocation(AppLoader.class.getResource("/View_Controller/MainScreen.fxml"));
         Parent root = loader.load();
         
         Scene scene = new Scene(root);
