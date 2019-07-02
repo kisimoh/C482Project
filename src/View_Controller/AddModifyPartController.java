@@ -195,7 +195,7 @@ public class AddModifyPartController implements Initializable {
         }
         
     @Override
-        public void initialize(URL url, ResourceBundle rb) {
+        public void initialize(URL location, ResourceBundle resources) {
             if (modPart == null) {
                 screenLabel.setText("Add Part");
                 int partAutoID = Inventory.getPartsCount();

@@ -242,7 +242,7 @@ public class AddModifyProductController implements Initializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL location, ResourceBundle resources) {
         if (currentModProduct == null) {
             ProductPageLabel.setText("Add Product");
             int productAutoID = Inventory.getProductCount();
