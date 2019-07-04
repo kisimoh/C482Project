@@ -38,7 +38,7 @@ public class AddModifyPartController implements Initializable {
     private RadioButton outsourcedPartSelect;
 
     @FXML
-    private Label partFlexFieldLabel;
+    private Label partsFlexFieldLabel;
 
     @FXML
     private Button partSave;
@@ -75,14 +75,14 @@ public class AddModifyPartController implements Initializable {
     @FXML
     void inhousePartSelectHandler(ActionEvent event) {
         isInHouse = true;
-        partFlexFieldLabel.setText("Machine ID");
+        partsFlexFieldLabel.setText("Machine ID");
     }
-
+    
     @FXML
     void outsourcedPartSelectHandler(ActionEvent event) {
         isInHouse = false;
-        partFlexFieldLabel.setText("Company Name");
-    }
+        partsFlexFieldLabel.setText("Company Name");
+   }
 
     @FXML
     void partCancel(ActionEvent event) throws IOException{
@@ -95,7 +95,7 @@ public class AddModifyPartController implements Initializable {
         alert.initModality(Modality.NONE);
         alert.setTitle("Cancel Modifcation of Part");
         alert.setHeaderText("Confirm cancellation");
-        alert.setContentText("Please confirm that you want to cancel modifying part " + partNameField.getText() + "?");
+        alert.setContentText("Please confirm that you want to cancel adding or modifying part " + partNameField.getText() + "?");
         Optional<ButtonType> result = alert.showAndWait();
         
         if (result.get() == ButtonType.OK) {
@@ -198,13 +198,13 @@ public class AddModifyPartController implements Initializable {
         public void initialize(URL location, ResourceBundle resources) {
             if (modPart == null) {
                 screenLabel.setText("Add Part");
-                int partAutoID = Inventory.getPartsCount();
+                int partAutoID = (Inventory.getPartsCount() + 1);
                 partIdField.setText("AUTO GEN: " + partAutoID);
+                isInHouse = false;
+               // partsFlexFieldLabel.setText("Please choose part type above");
                 
-                isInHouse = true;
-                partFlexFieldLabel.setText("Machine ID");
             }
-            else{
+            else {
               screenLabel.setText("ModifyPart");
               partIdField.setText(Integer.toString(modPart.getPartID()));
               partNameField.setText(modPart.getName());
@@ -217,12 +217,12 @@ public class AddModifyPartController implements Initializable {
                   partFlexField.setText(Integer.toString(((InhousePart) modPart).getMachineID()));
                   
                   
-                  partFlexFieldLabel.setText("Machine ID");
+                  partsFlexFieldLabel.setText("Machine ID");
                   inhousePartSelect.setSelected(true);
               }
               else {
                   partFlexField.setText(((OutsourcedPart) modPart).getCompanyName());
-                  partFlexFieldLabel.setText("Company Name");
+                  partsFlexFieldLabel.setText("Company Name");
                   outsourcedPartSelect.setSelected(true);
               }
               
