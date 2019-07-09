@@ -140,8 +140,8 @@ public class AddModifyPartController implements Initializable {
                } 
                else {
                    int partID = modPart.getPartID();
-                   modPart.setPartID(partID);
-                   Inventory.updatePart(modPart);
+                    modPart.setPartID(partID);
+                    Inventory.updatePart(modPart);
                }
                
                Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
@@ -165,7 +165,7 @@ public class AddModifyPartController implements Initializable {
            modPart.setMin(Integer.parseInt(partMin));
            modPart.setMax(Integer.parseInt(partMax));
            modPart.setCompanyName(partFlex);
-           }
+           
          
         try {
                modPart.isValid();
@@ -193,6 +193,8 @@ public class AddModifyPartController implements Initializable {
                 }  
             
         }
+        
+    }
         
     @Override
         public void initialize(URL location, ResourceBundle resources) {

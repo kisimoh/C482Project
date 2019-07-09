@@ -19,6 +19,8 @@ private final static ObservableList<Part> allParts = FXCollections.observableArr
     
 private final static ObservableList<Product> products = FXCollections.observableArrayList();
 
+public Inventory() {
+    }
 //methods
     
     public static void addProduct(Product newProduct) {
@@ -84,7 +86,7 @@ private final static ObservableList<Product> products = FXCollections.observable
         return allParts.size();
     }
     
-    public static void updatePart(Part updatedPart) {
+   public static void updatePart(Part updatedPart) {
         allParts.set(updatedPart.getPartID(), updatedPart);
     }
     
