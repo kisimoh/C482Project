@@ -107,7 +107,12 @@ public class MainScreenController implements Initializable {
 
     @FXML
     void addPartMainHandler(ActionEvent event) throws IOException  {
-        openPartScreen(event);
+        openAddPartScreen(event);
+    }
+    
+      @FXML
+    void modPartMainHandler(ActionEvent event) throws IOException  {
+        openModPartScreen(event);
     }
 
     @FXML
@@ -184,7 +189,7 @@ public class MainScreenController implements Initializable {
     void modifyPartMainHandler(ActionEvent event) throws IOException  {
         currentModProduct = mainProductTable.getSelectionModel().getSelectedItem();
         setModifiedProduct(currentModProduct);
-        openPartScreen(event);
+        openModPartScreen(event);
             
     }
 
@@ -201,8 +206,16 @@ public class MainScreenController implements Initializable {
     public MainScreenController(){
     }
  
-     public void openPartScreen(ActionEvent event) throws IOException {
-        Parent loader = FXMLLoader.load(getClass().getResource("AddModifyPart.fxml"));
+     public void openAddPartScreen(ActionEvent event) throws IOException {
+        Parent loader = FXMLLoader.load(getClass().getResource("AddPart.fxml"));
+        Scene scene = new Scene(loader);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+     }
+     
+      public void openModPartScreen(ActionEvent event) throws IOException {
+        Parent loader = FXMLLoader.load(getClass().getResource("ModifyPart.fxml"));
         Scene scene = new Scene(loader);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);

@@ -26,7 +26,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.xml.bind.ValidationException;
 
-public class AddModifyPartController implements Initializable {
+public class AddPartController implements Initializable {
 
     @FXML
     private Label screenLabel;
@@ -41,7 +41,7 @@ public class AddModifyPartController implements Initializable {
     private Label partsFlexFieldLabel;
 
     @FXML
-    private Button partSave;
+    private Button modPartSave;
 
     @FXML
     private TextField partIdField;
@@ -65,12 +65,6 @@ public class AddModifyPartController implements Initializable {
     private TextField partFlexField;
 
     private boolean isInHouse;
-    
-    private final Part modPart;
-    
-    public AddModifyPartController() {
-        this.modPart = getModPart();
-    }
   
     @FXML
     void inhousePartSelectHandler(ActionEvent event) {

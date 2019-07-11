@@ -87,7 +87,7 @@ public Inventory() {
     }
     
    public static void updatePart(Part updatedPart) {
-        allParts.set(updatedPart.getPartID(), updatedPart);
+        allParts.set();
     }
     
     public static Part lookupPart (int partID) {
