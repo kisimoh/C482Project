@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -105,6 +106,25 @@ public class ModifyPartController implements Initializable {
 
     @FXML
  void modPartSaveHandler(ActionEvent event) throws IOException {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initModality(Modality.NONE);
+        alert.setTitle("Cancel Modifcation of Part");
+        alert.setHeaderText("Confirm cancellation");
+        alert.setContentText("Please confirm that you want to cancel adding or modifying part " + partNameField.getText() + "?");
+        Optional<ButtonType> result = alert.showAndWait();
+        
+        if (result.get() == ButtonType.OK) {
+            Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Scene scene = new Scene(loader);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();
+        }
+        
+    }
+    
+    @FXML
+    void modifyPartSaveHandler(ActionEvent event) throws IOException {
         String partID = partIdField.getText();
         String partName = partNameField.getText();
         String partInv = partInventoryField.getText();
@@ -117,31 +137,32 @@ public class ModifyPartController implements Initializable {
             partInv = "0";
         }
         
-            int newPartId = 1;
-        for(Part p: Model.Inventory.getAllParts()) {
-            if (p.getPartID() >= newPartId) {
-                newPartId = p.getPartID() + 1;
-            }
-        
-        if (isInHouse) {
-           InhousePart addPart = new InhousePart();
-           addPart.setPartID(newPartID);
-           addPart.setName(partName);
-           addPart.setPrice(Double.parseDouble(partPrice));
-           addPart.setInStock(Integer.parseInt(partInv));
-           addPart.setMin(Integer.parseInt(partMin));
-           addPart.setMax(Integer.parseInt(partMax));
-           addPart.setMachineID(Integer.parseInt(partFlex));
+           if (isInHouse) {
+           InhousePart newPart = new InhousePart();
+           newPart.setPartID(newPartID);
+           newPart.setName(partName);
+           newPart.setPrice(Double.parseDouble(partPrice));
+           newPart.setInStock(Integer.parseInt(partInv));
+           newPart.setMin(Integer.parseInt(partMin));
+           newPart.setMax(Integer.parseInt(partMax));
+           newPart.setMachineID(Integer.parseInt(partFlex));
 
            try {
-               addPart.isValid();
-                addPart(addPart);
-            
-               Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-                Scene scene = new Scene(loader);
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.setScene(scene);
-                window.show();
+               newPart.isValid();
+               
+               if (newPart.isValid() == true) {
+                   addPart(newPart);
+                    ObservableList<Part> allParts = Model.Inventory.getAllParts();
+                    allParts.remove(newPart);
+                   
+               }
+             
+                  Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Scene scene = new Scene(loader);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();
+               
             } catch (ValidationException e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error Validating Part!");
@@ -151,35 +172,40 @@ public class ModifyPartController implements Initializable {
                 }  
             } 
         else {
-           OutsourcedPart addPart = new OutsourcedPart();
-           addPart.setPartID(newPartID);
-           addPart.setName(partName);
-           addPart.setPrice(Double.parseDouble(partPrice));
-           addPart.setInStock(Integer.parseInt(partInv));
-           addPart.setMin(Integer.parseInt(partMin));
-           addPart.setMax(Integer.parseInt(partMax));
-           addPart.setCompanyName(partFlex);
+           OutsourcedPart newPart = new OutsourcedPart();
+           newPart.setPartID(newPartID);
+           newPart.setName(partName);
+           newPart.setPrice(Double.parseDouble(partPrice));
+           newPart.setInStock(Integer.parseInt(partInv));
+           newPart.setMin(Integer.parseInt(partMin));
+           newPart.setMax(Integer.parseInt(partMax));
+           newPart.setCompanyName(partFlex);
 
            try {
-               addPart.isValid();
-                addPart(addPart);
+               newPart.isValid();
+               if (newPart.isValid() == true) {
+                   addPart(newPart);
+                   ObservableList<Part> allParts = Model.Inventory.getAllParts();
+                   allParts.remove(newPart);
+               }
+               
+                  Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Scene scene = new Scene(loader);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();
             
-               Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-                Scene scene = new Scene(loader);
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.setScene(scene);
-                window.show();
-            } catch (ValidationException e) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Error Validating Part!");
-                alert.setHeaderText("Part not valid");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
-                }  
+             
+           } catch (ValidationException e) {
+               Alert alert = new Alert(Alert.AlertType.INFORMATION);
+               alert.setTitle("Error Validating Part!");
+               alert.setHeaderText("Part not valid");
+               alert.setContentText(e.getMessage());
+               alert.showAndWait();
+               }  
         
     }
         }
-    }
         
         
     @Override

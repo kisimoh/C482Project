@@ -43,7 +43,7 @@ public Inventory() {
             return false;
     }
     
-    public static ObservableList<Product> getProduct(){
+    public static ObservableList<Product> getAllProducts(){
         return products;
     }
     
@@ -69,8 +69,8 @@ public Inventory() {
         return null;
     }
     
-    public static void addPart(Part newPart) {
-        allParts.add(newPart);
+    public static void addPart(Part part) {
+        allParts.add(part);
     }
     
     public static boolean deletePart(int PartID) {

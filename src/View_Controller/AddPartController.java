@@ -83,11 +83,6 @@ public class AddPartController implements Initializable {
    }
 
     @FXML
-    void partCancel(ActionEvent event) throws IOException{
-
-    }
-
-    @FXML
     void partCancelHandler(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.initModality(Modality.NONE);
@@ -120,13 +115,7 @@ public class AddPartController implements Initializable {
             partInv = "0";
         }
         
-            int newPartId = 1;
-        for(Part p: Model.Inventory.getAllParts()) {
-            if (p.getPartID() >= newPartId) {
-                newPartId = p.getPartID() + 1;
-            }
-        
-        if (isInHouse) {
+           if (isInHouse) {
            InhousePart newPart = new InhousePart();
            newPart.setPartID(newPartID);
            newPart.setName(partName);
@@ -143,12 +132,11 @@ public class AddPartController implements Initializable {
                    addPart(newPart);
                }
              
-                Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-                Scene scene = new Scene(loader);
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.setScene(scene);
-                window.show();
-               
+                  Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Scene scene = new Scene(loader);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();
                
             } catch (ValidationException e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -174,11 +162,11 @@ public class AddPartController implements Initializable {
                    addPart(newPart);
                }
                
-                Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-                Scene scene = new Scene(loader);
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.setScene(scene);
-                window.show();
+                  Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Scene scene = new Scene(loader);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();
             
              
            } catch (ValidationException e) {
@@ -191,7 +179,7 @@ public class AddPartController implements Initializable {
         
     }
         }
-  }
+ 
             
  @Override
     public void initialize(URL url, ResourceBundle rb) {

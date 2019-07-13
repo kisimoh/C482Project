@@ -24,7 +24,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import static Model.Inventory.getAllParts;
-import static Model.Inventory.getProduct;
+import static Model.Inventory.getAllProducts;
 import static Model.Inventory.canDeleteProduct;
 import static Model.Inventory.deletePart;
 import static Model.Inventory.deleteProduct;
@@ -195,12 +195,20 @@ public class MainScreenController implements Initializable {
 
     @FXML
     void searchPartsHandler(ActionEvent event) throws IOException  {
-        
+         for (Part p: Model.Inventory.getAllParts()) {
+            if (p.getName().equalsIgnoreCase(partsSearchBox.getText())) {
+                mainPartsTable.getSelectionModel().select(p);
+            }
+        }
     }
 
     @FXML
     void searchProductsHandler(ActionEvent event) throws IOException  {
-
+            for (Product p: Model.Inventory.getAllProducts()) {
+            if (p.getName().equalsIgnoreCase(productSearchBox.getText())) {
+                mainProductTable.getSelectionModel().select(p);
+            }
+        }
     }
     
     public MainScreenController(){
@@ -254,7 +262,7 @@ public class MainScreenController implements Initializable {
     }
    
     public void populateProductTable(){
-        mainProductTable.setItems(getProduct());
+        mainProductTable.setItems(getAllProducts());
     }
     
     public void setApp(AppLoader mainApp){
