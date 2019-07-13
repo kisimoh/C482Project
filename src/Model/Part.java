@@ -14,7 +14,7 @@ import javax.xml.bind.ValidationException;
 public abstract class Part {
     
     //variables
-    private int partID;
+    int partID;
     
     private String name;
     

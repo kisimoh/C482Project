@@ -18,7 +18,7 @@ public class Product {
 
     // variable
     private ObservableList<Part> associatedParts = FXCollections.observableArrayList();;
-    private int productID;
+    int productID;
     private String name;
     private double price;
     private int inStock;

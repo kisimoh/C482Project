@@ -1,10 +1,9 @@
 package View_Controller;
 
 import Model.InhousePart;
-import Model.Inventory;
+import static Model.Inventory.addPart;
 import Model.OutsourcedPart;
 import Model.Part;
-import static View_Controller.MainScreenController.getModPart;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,6 +24,9 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.xml.bind.ValidationException;
+        
+
+
 
 public class AddPartController implements Initializable {
 
@@ -41,7 +43,7 @@ public class AddPartController implements Initializable {
     private Label partsFlexFieldLabel;
 
     @FXML
-    private Button modPartSave;
+    private Button addPartSave;
 
     @FXML
     private TextField partIdField;
@@ -65,6 +67,8 @@ public class AddPartController implements Initializable {
     private TextField partFlexField;
 
     private boolean isInHouse;
+    
+    private int newPartID;               
   
     @FXML
     void inhousePartSelectHandler(ActionEvent event) {
@@ -101,10 +105,10 @@ public class AddPartController implements Initializable {
         }
         
     }
-
-    @FXML
-    void partSaveHandler(ActionEvent event) throws IOException {
     
+    @FXML
+    void addPartSaveHandler(ActionEvent event) throws IOException {
+        String partID = partIdField.getText();
         String partName = partNameField.getText();
         String partInv = partInventoryField.getText();
         String partPrice = partPriceField.getText();
@@ -116,33 +120,36 @@ public class AddPartController implements Initializable {
             partInv = "0";
         }
         
+            int newPartId = 1;
+        for(Part p: Model.Inventory.getAllParts()) {
+            if (p.getPartID() >= newPartId) {
+                newPartId = p.getPartID() + 1;
+            }
+        
         if (isInHouse) {
-           InhousePart modPart = new InhousePart();
-           modPart.setName(partName);
-           modPart.setPrice(Double.parseDouble(partPrice));
-           modPart.setInStock(Integer.parseInt(partInv));
-           modPart.setMin(Integer.parseInt(partMin));
-           modPart.setMax(Integer.parseInt(partMax));
-           modPart.setMachineID(Integer.parseInt(partFlex));
-            
+           InhousePart newPart = new InhousePart();
+           newPart.setPartID(newPartID);
+           newPart.setName(partName);
+           newPart.setPrice(Double.parseDouble(partPrice));
+           newPart.setInStock(Integer.parseInt(partInv));
+           newPart.setMin(Integer.parseInt(partMin));
+           newPart.setMax(Integer.parseInt(partMax));
+           newPart.setMachineID(Integer.parseInt(partFlex));
+
            try {
-               modPart.isValid();
+               newPart.isValid();
                
-               if (modPart == null) {
-                   modPart.setPartID(Inventory.getPartsCount());
-                   Inventory.addPart(modPart);
-               } 
-               else {
-                   int partID = modPart.getPartID();
-                    modPart.setPartID(partID);
-                    Inventory.updatePart(modPart);
+               if (newPart.isValid() == true) {
+                   addPart(newPart);
                }
-               
-               Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+             
+                Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
                 Scene scene = new Scene(loader);
                 Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 window.setScene(scene);
                 window.show();
+               
+               
             } catch (ValidationException e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error Validating Part!");
@@ -152,82 +159,42 @@ public class AddPartController implements Initializable {
                 }  
             } 
         else {
-           OutsourcedPart modPart = new OutsourcedPart();
-           modPart.setName(partName);
-           modPart.setPrice(Double.parseDouble(partPrice));
-           modPart.setInStock(Integer.parseInt(partInv));
-           modPart.setMin(Integer.parseInt(partMin));
-           modPart.setMax(Integer.parseInt(partMax));
-           modPart.setCompanyName(partFlex);
-           
-         
-        try {
-               modPart.isValid();
-               
-               if (modPart == null) {
-                   modPart.setPartID(Inventory.getPartsCount());
-                   Inventory.addPart(modPart);
-               } 
-               else {
-                   int partID = modPart.getPartID();
-                   modPart.setPartID(partID);
-                   Inventory.updatePart(modPart);
+           OutsourcedPart newPart = new OutsourcedPart();
+           newPart.setPartID(newPartID);
+           newPart.setName(partName);
+           newPart.setPrice(Double.parseDouble(partPrice));
+           newPart.setInStock(Integer.parseInt(partInv));
+           newPart.setMin(Integer.parseInt(partMin));
+           newPart.setMax(Integer.parseInt(partMax));
+           newPart.setCompanyName(partFlex);
+
+           try {
+               newPart.isValid();
+               if (newPart.isValid() == true) {
+                   addPart(newPart);
                }
-               Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+               
+                Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
                 Scene scene = new Scene(loader);
                 Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 window.setScene(scene);
                 window.show();
-            } catch (ValidationException e) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Error Validating Part!");
-                alert.setHeaderText("Part not valid");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
-                }  
             
+             
+           } catch (ValidationException e) {
+               Alert alert = new Alert(Alert.AlertType.INFORMATION);
+               alert.setTitle("Error Validating Part!");
+               alert.setHeaderText("Part not valid");
+               alert.setContentText(e.getMessage());
+               alert.showAndWait();
+               }  
+        
+    }
         }
-        
-    }
-        
-    @Override
-        public void initialize(URL location, ResourceBundle resources) {
-            if (modPart == null) {
-                screenLabel.setText("Add Part");
-                int partAutoID = (Inventory.getPartsCount() + 1);
-                partIdField.setText("AUTO GEN: " + partAutoID);
-                isInHouse = false;
-               // partsFlexFieldLabel.setText("Please choose part type above");
-                
-            }
-            else {
-              screenLabel.setText("ModifyPart");
-              partIdField.setText(Integer.toString(modPart.getPartID()));
-              partNameField.setText(modPart.getName());
-              partInventoryField.setText(Integer.toString(modPart.getInStock()));
-              partPriceField.setText(Double.toString(modPart.getPrice()));
-              partMinField.setText(Integer.toString(modPart.getMin()));
-              partMaxField.setText(Integer.toString(modPart.getMax()));
-              
-              if (modPart instanceof InhousePart) {
-                  partFlexField.setText(Integer.toString(((InhousePart) modPart).getMachineID()));
-                  
-                  
-                  partsFlexFieldLabel.setText("Machine ID");
-                  inhousePartSelect.setSelected(true);
-              }
-              else {
-                  partFlexField.setText(((OutsourcedPart) modPart).getCompanyName());
-                  partsFlexFieldLabel.setText("Company Name");
-                  outsourcedPartSelect.setSelected(true);
-              }
-              
-            }
-        
-        
-        
-    }
-    
-    
-
+  }
+            
+ @Override
+    public void initialize(URL url, ResourceBundle rb) {
+     
+    }   
 }

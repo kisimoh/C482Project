@@ -52,7 +52,12 @@ public Inventory() {
     }
     
     public static void updateProduct(Product updatedProduct) {
-        products.set(updatedProduct.getProductID(), updatedProduct);
+          for (int i = 0; i < products.size(); i++) {
+       if (products.get(i).getProductID() == updatedProduct.productID) {
+           products.set(i, updatedProduct);
+           break;
+       }
+    }
     }
     
     public static Product lookupProduct (int productID) {
@@ -87,7 +92,12 @@ public Inventory() {
     }
     
    public static void updatePart(Part updatedPart) {
-        allParts.set();
+        for (int i = 0; i < allParts.size(); i++) {
+       if (allParts.get(i).getPartID() == updatedPart.partID) {
+           allParts.set(i, updatedPart);
+           break;
+       }
+   }
     }
     
     public static Part lookupPart (int partID) {
