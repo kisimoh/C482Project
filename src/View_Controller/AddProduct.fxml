@@ -18,7 +18,7 @@
             <Label layoutX="68.0" layoutY="200.0" prefHeight="23.0" prefWidth="91.0" text="Price/Cost" />
             <Label layoutX="68.0" layoutY="241.0" prefHeight="23.0" prefWidth="91.0" text="Min" />
             <Label layoutX="315.0" layoutY="241.0" prefHeight="23.0" prefWidth="61.0" text="Max" />
-            <TextField fx:id="productIDField" layoutX="178.0" layoutY="77.0" />
+            <TextField fx:id="productIDField" editable="false" layoutX="178.0" layoutY="77.0" />
             <TextField fx:id="productNameField" layoutX="178.0" layoutY="116.0" />
             <TextField fx:id="productInventoryField" layoutX="178.0" layoutY="159.0" />
             <TextField fx:id="productPriceField" layoutX="178.0" layoutY="198.0" />

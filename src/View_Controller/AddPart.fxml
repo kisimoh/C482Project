@@ -22,7 +22,7 @@
             <Label fx:id="partsFlexFieldLabel" alignment="CENTER_RIGHT" layoutX="-7.0" layoutY="272.0" prefHeight="50.0" prefWidth="180.0" text="Please pick part type above" />
             <Button fx:id="addPartSave" layoutX="353.0" layoutY="333.0" mnemonicParsing="false" onAction="#addPartSaveHandler" text="Save" />
             <Button fx:id="partCancel" layoutX="427.0" layoutY="333.0" mnemonicParsing="false" onAction="#partCancelHandler" text="Cancel" />
-            <TextField fx:id="partIdField" layoutX="178.0" layoutY="77.0" />
+            <TextField fx:id="partIdField" editable="false" layoutX="178.0" layoutY="77.0" />
             <TextField fx:id="partNameField" layoutX="178.0" layoutY="116.0" />
             <TextField fx:id="partInventoryField" layoutX="178.0" layoutY="159.0" />
             <TextField fx:id="partPriceField" layoutX="178.0" layoutY="198.0" />

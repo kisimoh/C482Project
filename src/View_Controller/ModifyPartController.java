@@ -66,7 +66,9 @@ public class ModifyPartController implements Initializable {
 
     private boolean isInHouse;   
     
-    private int newPartID;  
+    private int newPartID; 
+    
+    //private static currentModPart;
   
     @FXML
     void inhousePartSelectHandler(ActionEvent event) {
@@ -210,8 +212,8 @@ public class ModifyPartController implements Initializable {
         
     @Override
         public void initialize(URL location, ResourceBundle resources) {
+      
+        }
     }
     
     
-
-}

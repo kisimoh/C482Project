@@ -27,6 +27,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.xml.bind.ValidationException;
@@ -106,6 +107,8 @@ public class AddProductController implements Initializable {
     
     private final Product currentModProduct;
     
+    private int newProductID;
+    
     public AddProductController() {
         this.currentModProduct = getModifiedProduct();
     }
@@ -121,18 +124,26 @@ public class AddProductController implements Initializable {
     
     @FXML
     void addPartToProductHandler(ActionEvent event) throws IOException {
-        Part part = addPartTable.getSelectionModel().getSelectedItem();
-        productParts.add(part);
-        populateCurrentPartsTable();
+       //Part part = addPartTable.getSelectionModel().getSelectedItem();
+        //productParts.add(part);
+       // populateCurrentPartsTable();
+       
+       
+        ObservableList<Part> selectedParts = addPartTable.getItems();
+        Part chosenPart = partsContainedTable.getSelectionModel().getSelectedItem();
+        selectedParts.add(chosenPart);
+        addPartTable.setItems(selectedParts);
+        
     }
+    
 
     @FXML
     void cancelProductHandler(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.initModality(Modality.NONE);
-        alert.setTitle("Cancel Modifying Product");
-        alert.setHeaderText("Please confirm cancelling modifying product.");
-        alert.setContentText("Please confirm you want to cancel update to product " + productNameField.getText() + ".");
+        alert.setTitle("Cancel Adding Product");
+        alert.setHeaderText("Please confirm cancelling Adding product.");
+        alert.setContentText("Please confirm you want to cancel adding" + productNameField.getText() + ".");
         Optional<ButtonType> result = alert.showAndWait();
         
         if (result.get() == ButtonType.OK) {
@@ -172,6 +183,7 @@ public class AddProductController implements Initializable {
 
     @FXML
     void saveProductHandler(ActionEvent event) throws IOException, ValidationException {
+        String productID = productIDField.getText();
         String productName = productNameField.getText();
         String productInventory = productInventoryField.getText();
         String productPrice = productPriceField.getText();
@@ -179,6 +191,7 @@ public class AddProductController implements Initializable {
         String productMax = productMaxField.getText();
         
         Product newProduct = new Product();
+        newProduct.setProductID(newProductID);
         newProduct.setName(productName);
         newProduct.setPrice(Double.parseDouble(productPrice));
         newProduct.setInStock(Integer.parseInt(productInventory));
@@ -243,26 +256,11 @@ public class AddProductController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (currentModProduct == null) {
-            ProductPageLabel.setText("Add Product");      
-        }
-        else {
-            ProductPageLabel.setText("Modify Product");
-            
-            productIDField.setText(Integer.toString(currentModProduct.getProductID()));
-            productNameField.setText(currentModProduct.getName());
-            productInventoryField.setText(Integer.toString(currentModProduct.getInStock()));
-            productPriceField.setText(Double.toString(currentModProduct.getPrice()));
-            productMinField.setText(Integer.toString(currentModProduct.getMin()));
-            productMaxField.setText(Integer.toString(currentModProduct.getMax()));
-            
-            productParts = currentModProduct.getAssociatedParts();
-        }
         
-        addPartPartIDColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPartID()).asObject());
-        addPartNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        addPartInventoryColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getInStock()).asObject());
-        addPartPriceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrice()).asObject());
+        addPartPartIDColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("partID"));
+        addPartNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("partName"));
+        addPartInventoryColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("partInStock"));
+        addPartPriceColumn.setCellValueFactory(new PropertyValueFactory<Part, Double>("partPrice"));
         
         partsContainedPartIDColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPartID()).asObject());
         partsContainedPartNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
@@ -271,7 +269,7 @@ public class AddProductController implements Initializable {
         
        
         populateAvailablePartsTable();
-        populateCurrentPartsTable();
+        //populateCurrentPartsTable();
         
       
     }

@@ -66,9 +66,7 @@ public class AddPartController implements Initializable {
     @FXML
     private TextField partFlexField;
 
-    private boolean isInHouse;
-    
-    private int newPartID;               
+    private boolean isInHouse;             
   
     @FXML
     void inhousePartSelectHandler(ActionEvent event) {
@@ -103,13 +101,20 @@ public class AddPartController implements Initializable {
     
     @FXML
     void addPartSaveHandler(ActionEvent event) throws IOException {
-        String partID = partIdField.getText();
+        //String partID = partIdField.getText();
         String partName = partNameField.getText();
         String partInv = partInventoryField.getText();
         String partPrice = partPriceField.getText();
         String partMin = partMinField.getText();
         String partMax = partMaxField.getText();
         String partFlex = partFlexField.getText();
+        
+        int newPartID = 1;
+        for(Part p: Model.Inventory.getAllParts()) {
+            if (p.getPartID() >= newPartID) {
+                newPartID = p.getPartID() + 1;
+            }
+        }
         
         if ("".equals(partInv)) {
             partInv = "0";
