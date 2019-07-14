@@ -113,26 +113,23 @@ public class AddProductController implements Initializable {
         this.currentModProduct = getModifiedProduct();
     }
     
-    public void populateAvailablePartsTable() {
-        partsContainedTable.setItems(Inventory.getAllParts());
-        
-    }
+    //public void populateAvailablePartsTable() {
+    //    addPartTable.setItems(productParts);
+    //}
 
     public void populateCurrentPartsTable() {
-        addPartTable.setItems(productParts);
+        partsContainedTable.setItems(productParts);
     }
     
     @FXML
     void addPartToProductHandler(ActionEvent event) throws IOException {
-       //Part part = addPartTable.getSelectionModel().getSelectedItem();
-        //productParts.add(part);
-       // populateCurrentPartsTable();
+   
        
        
         ObservableList<Part> selectedParts = addPartTable.getItems();
         Part chosenPart = partsContainedTable.getSelectionModel().getSelectedItem();
         selectedParts.add(chosenPart);
-        addPartTable.setItems(selectedParts);
+        partsContainedTable.setItems(selectedParts);
         
     }
     
@@ -143,7 +140,7 @@ public class AddProductController implements Initializable {
         alert.initModality(Modality.NONE);
         alert.setTitle("Cancel Adding Product");
         alert.setHeaderText("Please confirm cancelling Adding product.");
-        alert.setContentText("Please confirm you want to cancel adding" + productNameField.getText() + ".");
+        alert.setContentText("Please confirm you want to cancel adding " + productNameField.getText() + ".");
         Optional<ButtonType> result = alert.showAndWait();
         
         if (result.get() == ButtonType.OK) {
@@ -243,7 +240,7 @@ public class AddProductController implements Initializable {
         if (searchedPart != null) {
             ObservableList<Part> filteredPartsList = FXCollections.observableArrayList();
             filteredPartsList.add(searchedPart);
-            partsContainedTable.setItems(filteredPartsList);
+            addPartTable.setItems(filteredPartsList);
         }
         else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -256,20 +253,21 @@ public class AddProductController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+        productIDField.setText("Auto Gen - Disabled");
+        productIDField.setDisable(true);
         addPartPartIDColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("partID"));
-        addPartNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("partName"));
-        addPartInventoryColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("partInStock"));
-        addPartPriceColumn.setCellValueFactory(new PropertyValueFactory<Part, Double>("partPrice"));
+        addPartNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("name"));
+        addPartInventoryColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("inStock"));
+        addPartPriceColumn.setCellValueFactory(new PropertyValueFactory<Part, Double>("price"));
         
-        partsContainedPartIDColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPartID()).asObject());
-        partsContainedPartNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        partsContainedInventoryColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getInStock()).asObject());
-        partsContainedPriceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrice()).asObject());
+        partsContainedPartIDColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("partID"));
+        partsContainedPartNameColumn.setCellValueFactory(new PropertyValueFactory<Part, String>("name"));
+        partsContainedInventoryColumn.setCellValueFactory(new PropertyValueFactory<Part, Integer>("inStock"));
+        partsContainedPriceColumn.setCellValueFactory(new PropertyValueFactory<Part, Double>("price"));
         
        
-        populateAvailablePartsTable();
-        //populateCurrentPartsTable();
+        //populateAvailablePartsTable();
+        populateCurrentPartsTable();
         
       
     }

@@ -188,6 +188,7 @@ public class AddPartController implements Initializable {
             
  @Override
     public void initialize(URL url, ResourceBundle rb) {
-     
+        partIdField.setText("Auto Gen - Disabled");
+        partIdField.setDisable(true);
     }   
 }

@@ -146,7 +146,7 @@ public class Product {
             throw new ValidationException("Minimum inventory cannot exceed maximum. Please enter a valid minimum inventory level.");
         }
         
-        if (getAssociatedPartsCount() < 2) {
+        if (getAssociatedPartsCount() < 1) {
             throw new ValidationException("Products must contain a minimum of 1 part. Please add a part.");
         }
         

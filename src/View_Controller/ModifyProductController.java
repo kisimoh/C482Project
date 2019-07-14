@@ -242,13 +242,8 @@ public class ModifyProductController implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        if (currentModProduct == null) {
-            ProductPageLabel.setText("Add Product");      
-        }
-        else {
-            ProductPageLabel.setText("Modify Product");
-            
+    public void initialize(URL location, ResourceBundle resources) {  
+            productIDField.setDisable(true);
             productIDField.setText(Integer.toString(currentModProduct.getProductID()));
             productNameField.setText(currentModProduct.getName());
             productInventoryField.setText(Integer.toString(currentModProduct.getInStock()));
@@ -257,7 +252,7 @@ public class ModifyProductController implements Initializable {
             productMaxField.setText(Integer.toString(currentModProduct.getMax()));
             
             productParts = currentModProduct.getAssociatedParts();
-        }
+        
         
         addPartPartIDColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPartID()).asObject());
         addPartNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));

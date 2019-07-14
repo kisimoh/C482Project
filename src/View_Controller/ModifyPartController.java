@@ -1,9 +1,11 @@
 package View_Controller;
 
 import Model.InhousePart;
+import Model.Inventory;
 import static Model.Inventory.addPart;
 import Model.OutsourcedPart;
 import Model.Part;
+import static View_Controller.MainScreenController.getModPart;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -66,10 +68,15 @@ public class ModifyPartController implements Initializable {
 
     private boolean isInHouse;   
     
-    private int newPartID; 
+    //private int newPartID; 
     
-    //private static currentModPart;
-  
+    private final Part modifyPart;
+    
+      public ModifyPartController() {
+        this.modifyPart = getModPart();
+    }
+    
+    
     @FXML
     void inhousePartSelectHandler(ActionEvent event) {
         isInHouse = true;
@@ -105,28 +112,9 @@ public class ModifyPartController implements Initializable {
         }
         
     }
-
+  
     @FXML
- void modPartSaveHandler(ActionEvent event) throws IOException {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.initModality(Modality.NONE);
-        alert.setTitle("Cancel Modifcation of Part");
-        alert.setHeaderText("Confirm cancellation");
-        alert.setContentText("Please confirm that you want to cancel adding or modifying part " + partNameField.getText() + "?");
-        Optional<ButtonType> result = alert.showAndWait();
-        
-        if (result.get() == ButtonType.OK) {
-            Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
-            Scene scene = new Scene(loader);
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(scene);
-            window.show();
-        }
-        
-    }
-    
-    @FXML
-    void modifyPartSaveHandler(ActionEvent event) throws IOException {
+    void modPartSaveHandler(ActionEvent event) throws IOException {
         String partID = partIdField.getText();
         String partName = partNameField.getText();
         String partInv = partInventoryField.getText();
@@ -140,22 +128,24 @@ public class ModifyPartController implements Initializable {
         }
         
            if (isInHouse) {
-           InhousePart newPart = new InhousePart();
-           newPart.setPartID(newPartID);
-           newPart.setName(partName);
-           newPart.setPrice(Double.parseDouble(partPrice));
-           newPart.setInStock(Integer.parseInt(partInv));
-           newPart.setMin(Integer.parseInt(partMin));
-           newPart.setMax(Integer.parseInt(partMax));
-           newPart.setMachineID(Integer.parseInt(partFlex));
+           InhousePart modifyPart = new InhousePart();
+           modifyPart.setPartID(Integer.parseInt(partID));
+           modifyPart.setName(partName);
+           modifyPart.setPrice(Double.parseDouble(partPrice));
+           modifyPart.setInStock(Integer.parseInt(partInv));
+           modifyPart.setMin(Integer.parseInt(partMin));
+           modifyPart.setMax(Integer.parseInt(partMax));
+           modifyPart.setMachineID(Integer.parseInt(partFlex));
 
            try {
-               newPart.isValid();
+               modifyPart.isValid();
                
-               if (newPart.isValid() == true) {
-                   addPart(newPart);
-                    ObservableList<Part> allParts = Model.Inventory.getAllParts();
-                    allParts.remove(newPart);
+               if (modifyPart.isValid() == true) {
+                   //addPart(newPart);
+                   // ObservableList<Part> allParts = Model.Inventory.getAllParts();
+                    //allParts.remove(newPart);
+                    Inventory.updatePart(modifyPart);
+                    
                    
                }
              
@@ -174,29 +164,29 @@ public class ModifyPartController implements Initializable {
                 }  
             } 
         else {
-           OutsourcedPart newPart = new OutsourcedPart();
-           newPart.setPartID(newPartID);
-           newPart.setName(partName);
-           newPart.setPrice(Double.parseDouble(partPrice));
-           newPart.setInStock(Integer.parseInt(partInv));
-           newPart.setMin(Integer.parseInt(partMin));
-           newPart.setMax(Integer.parseInt(partMax));
-           newPart.setCompanyName(partFlex);
+           OutsourcedPart modifyPart = new OutsourcedPart();
+           modifyPart.setPartID(Integer.parseInt(partID));
+           modifyPart.setName(partName);
+           modifyPart.setPrice(Double.parseDouble(partPrice));
+           modifyPart.setInStock(Integer.parseInt(partInv));
+           modifyPart.setMin(Integer.parseInt(partMin));
+           modifyPart.setMax(Integer.parseInt(partMax));
+           modifyPart.setCompanyName(partFlex);
 
            try {
-               newPart.isValid();
-               if (newPart.isValid() == true) {
-                   addPart(newPart);
-                   ObservableList<Part> allParts = Model.Inventory.getAllParts();
-                   allParts.remove(newPart);
+               modifyPart.isValid();
+               if (modifyPart.isValid() == true) {
+                   //addPart(newPart);
+                   //ObservableList<Part> allParts = Model.Inventory.getAllParts();
+                   //allParts.remove(newPart);
+                   Inventory.updatePart(modifyPart);
                }
                
-                  Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
             Scene scene = new Scene(loader);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(scene);
             window.show();
-            
              
            } catch (ValidationException e) {
                Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -212,8 +202,28 @@ public class ModifyPartController implements Initializable {
         
     @Override
         public void initialize(URL location, ResourceBundle resources) {
-      
+           
+            partIdField.setDisable(true);
+            partIdField.setText(Integer.toString(modifyPart.getPartID()));
+            partNameField.setText(modifyPart.getName());
+            partInventoryField.setText(Integer.toString(modifyPart.getInStock()));
+            partPriceField.setText(Double.toString(modifyPart.getPrice()));
+            partMinField.setText(Integer.toString(modifyPart.getMin()));
+            partMaxField.setText(Integer.toString(modifyPart.getMax()));
+            
+          if (modifyPart instanceof InhousePart) {
+                partFlexField.setText(Integer.toString(((InhousePart) modifyPart).getMachineID()));
+                
+                partsFlexFieldLabel.setText("Machine ID");
+                inhousePartSelect.setSelected(true);
+
+            } else {
+                partFlexField.setText(((OutsourcedPart) modifyPart).getCompanyName());
+                partsFlexFieldLabel.setText("Company Name");
+                outsourcedPartSelect.setSelected(true);
+            
+            }
         }
-    }
+}
     
-    
+
