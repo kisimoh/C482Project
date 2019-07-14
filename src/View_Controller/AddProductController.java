@@ -113,21 +113,20 @@ public class AddProductController implements Initializable {
         this.currentModProduct = getModifiedProduct();
     }
     
-    //public void populateAvailablePartsTable() {
-    //    addPartTable.setItems(productParts);
-    //}
-
+    public void populateAvailablePartsTable() {
+    addPartTable.setItems(Model.Inventory.getAllParts());
+    ;
+    }
+    
     public void populateCurrentPartsTable() {
-        partsContainedTable.setItems(productParts);
+    partsContainedTable.setItems(productParts);
     }
     
     @FXML
     void addPartToProductHandler(ActionEvent event) throws IOException {
-   
-       
-       
+
         ObservableList<Part> selectedParts = addPartTable.getItems();
-        Part chosenPart = partsContainedTable.getSelectionModel().getSelectedItem();
+        Part chosenPart = addPartTable.getSelectionModel().getSelectedItem();
         selectedParts.add(chosenPart);
         partsContainedTable.setItems(selectedParts);
         

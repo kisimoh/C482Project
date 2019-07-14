@@ -100,7 +100,7 @@ public class ModifyPartController implements Initializable {
         alert.initModality(Modality.NONE);
         alert.setTitle("Cancel Modifcation of Part");
         alert.setHeaderText("Confirm cancellation");
-        alert.setContentText("Please confirm that you want to cancel adding or modifying part " + partNameField.getText() + "?");
+        alert.setContentText("Please confirm that you want to cancel modifying part " + partNameField.getText() + "?");
         Optional<ButtonType> result = alert.showAndWait();
         
         if (result.get() == ButtonType.OK) {
