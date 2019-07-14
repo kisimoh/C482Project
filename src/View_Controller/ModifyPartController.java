@@ -141,12 +141,7 @@ public class ModifyPartController implements Initializable {
                modifyPart.isValid();
                
                if (modifyPart.isValid() == true) {
-                   //addPart(newPart);
-                   // ObservableList<Part> allParts = Model.Inventory.getAllParts();
-                    //allParts.remove(newPart);
-                    Inventory.updatePart(modifyPart);
-                    
-                   
+                    Inventory.updatePart(modifyPart);                 
                }
              
                   Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
@@ -176,10 +171,8 @@ public class ModifyPartController implements Initializable {
            try {
                modifyPart.isValid();
                if (modifyPart.isValid() == true) {
-                   //addPart(newPart);
-                   //ObservableList<Part> allParts = Model.Inventory.getAllParts();
-                   //allParts.remove(newPart);
                    Inventory.updatePart(modifyPart);
+        
                }
                
             Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));

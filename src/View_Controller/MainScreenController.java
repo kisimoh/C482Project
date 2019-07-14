@@ -232,19 +232,38 @@ public class MainScreenController implements Initializable {
    
     
      public void openAddProductScreen(ActionEvent event) throws IOException {
+        if (currentModPart != null){
         Parent loader = FXMLLoader.load(getClass().getResource("AddProduct.fxml"));
         Scene scene = new Scene(loader);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
+        
+              }
+        else {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+               alert.setTitle("You have not selected a Part to Modify.");
+               alert.setHeaderText("Please select a Part to Modify");
+               alert.setContentText("Please click okay to return to main screen.");
+               alert.showAndWait();
+               }  
      }
      
        public void openModifyProductScreen(ActionEvent event) throws IOException {
+        if (currentModProduct != null){
         Parent loader = FXMLLoader.load(getClass().getResource("ModifyProduct.fxml"));
         Scene scene = new Scene(loader);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
+        }
+        else {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+               alert.setTitle("You have not selected a Product to Modify.");
+               alert.setHeaderText("Please select a Product to Modify");
+               alert.setContentText("Please click okay to return to main screen.");
+               alert.showAndWait();
+               }  
      }
     
     public static Part getModPart() {
