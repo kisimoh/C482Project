@@ -117,9 +117,9 @@ public class MainScreenController implements Initializable {
 
     @FXML
     void addProductMainHandler(ActionEvent event) throws IOException  {
-        openProductScreen(event);
+        openAddProductScreen(event);
     }
-
+    
     @FXML
     void deletePartHandler(ActionEvent event) throws IOException  {
         Part part = mainPartsTable.getSelectionModel().getSelectedItem();
@@ -179,17 +179,17 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
-    void mainModifyProductHandler(ActionEvent event) throws IOException  {
+    void modifyPartMainHandler(ActionEvent event) throws IOException  {
         currentModPart = mainPartsTable.getSelectionModel().getSelectedItem();
         setModifiedPart(currentModPart);
-        openProductScreen(event);
+        openModPartScreen(event);
     }
 
     @FXML
-    void modifyPartMainHandler(ActionEvent event) throws IOException  {
+    void mainModifyProductHandler(ActionEvent event) throws IOException  {
         currentModProduct = mainProductTable.getSelectionModel().getSelectedItem();
         setModifiedProduct(currentModProduct);
-        openModPartScreen(event);
+        openModifyProductScreen(event);
             
     }
 
@@ -231,8 +231,16 @@ public class MainScreenController implements Initializable {
      }
    
     
-     public void openProductScreen(ActionEvent event) throws IOException {
-        Parent loader = FXMLLoader.load(getClass().getResource("AddModifyProduct.fxml"));
+     public void openAddProductScreen(ActionEvent event) throws IOException {
+        Parent loader = FXMLLoader.load(getClass().getResource("AddProduct.fxml"));
+        Scene scene = new Scene(loader);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+     }
+     
+       public void openModifyProductScreen(ActionEvent event) throws IOException {
+        Parent loader = FXMLLoader.load(getClass().getResource("ModifyProduct.fxml"));
         Scene scene = new Scene(loader);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);

@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="574.0" prefWidth="1026.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.AddModifyProductController">
+<AnchorPane id="AnchorPane" prefHeight="574.0" prefWidth="1026.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.AddProductController">
    <children>
       <AnchorPane id="AnchorPane" layoutY="57.0" prefHeight="380.0" prefWidth="522.0">
          <children>

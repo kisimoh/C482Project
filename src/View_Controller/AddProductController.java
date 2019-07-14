@@ -31,7 +31,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.xml.bind.ValidationException;
 
-public class AddModifyProductController implements Initializable {
+public class AddProductController implements Initializable {
     
     @FXML
     private Label ProductPageLabel;
@@ -106,7 +106,7 @@ public class AddModifyProductController implements Initializable {
     
     private final Product currentModProduct;
     
-    public AddModifyProductController() {
+    public AddProductController() {
         this.currentModProduct = getModifiedProduct();
     }
     
