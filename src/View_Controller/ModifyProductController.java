@@ -235,7 +235,7 @@ public class ModifyProductController implements Initializable {
         if (searchedPart != null) {
             ObservableList<Part> filteredPartsList = FXCollections.observableArrayList();
             filteredPartsList.add(searchedPart);
-            partsContainedTable.setItems(filteredPartsList);
+            addPartTable.setItems(filteredPartsList);
         }
         else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
