@@ -197,16 +197,13 @@ public class AddProductController implements Initializable {
         newProduct.setMin(Integer.parseInt(productMin));
         newProduct.setMax(Integer.parseInt(productMax));
    
+        for (Part h: productParts) 
+            newProduct.addAssociatedParts(h);
+         
         try {
             newProduct.isValid();
             
-            if (newProduct.isValid() == true) {
-               for (Part h: productParts) 
-            newProduct.addAssociatedParts(h);
-            
-               Inventory.addProduct(newProduct);
-            }
-                
+           Inventory.addProduct(newProduct);
 
             Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
             Scene scene = new Scene(loader);
