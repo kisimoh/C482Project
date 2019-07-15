@@ -110,13 +110,12 @@ public class ModifyProductController implements Initializable {
         this.currentModProduct = getModifiedProduct();
     }
     
-    public void populateAvailablePartsTable() {
-        partsContainedTable.setItems(Inventory.getAllParts());
-        
+   public void populateAvailablePartsTable() {
+    addPartTable.setItems(Model.Inventory.getAllParts());
     }
-
+    
     public void populateCurrentPartsTable() {
-        addPartTable.setItems(productParts);
+    partsContainedTable.setItems(productParts);
     }
     
     @FXML
