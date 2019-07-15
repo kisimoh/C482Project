@@ -252,7 +252,7 @@ public class AddProductController implements Initializable {
         partsContainedPriceColumn.setCellValueFactory(new PropertyValueFactory<Part, Double>("price"));
         
        
-        //populateAvailablePartsTable();
+        populateAvailablePartsTable();
         populateCurrentPartsTable();
         
       
