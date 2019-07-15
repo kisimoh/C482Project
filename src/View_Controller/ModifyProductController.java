@@ -121,7 +121,7 @@ public class ModifyProductController implements Initializable {
     
     @FXML
     void addPartToProductHandler(ActionEvent event) throws IOException {
-          Part part = addPartTable.getSelectionModel().getSelectedItem();
+        Part part = addPartTable.getSelectionModel().getSelectedItem();
         productParts.add(part);
         populateCurrentPartsTable();
     }
