@@ -101,7 +101,6 @@ public class AddPartController implements Initializable {
     
     @FXML
     void addPartSaveHandler(ActionEvent event) throws IOException {
-        //String partID = partIdField.getText();
         String partName = partNameField.getText();
         String partInv = partInventoryField.getText();
         String partPrice = partPriceField.getText();

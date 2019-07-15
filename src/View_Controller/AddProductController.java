@@ -105,17 +105,13 @@ public class AddProductController implements Initializable {
     
     private ObservableList<Part> productParts = FXCollections.observableArrayList();
     
-    private final Product currentModProduct;
-    
     private int newProductID;
     
     public AddProductController() {
-        this.currentModProduct = getModifiedProduct();
     }
     
     public void populateAvailablePartsTable() {
     addPartTable.setItems(Model.Inventory.getAllParts());
-    ;
     }
     
     public void populateCurrentPartsTable() {
@@ -124,12 +120,9 @@ public class AddProductController implements Initializable {
     
     @FXML
     void addPartToProductHandler(ActionEvent event) throws IOException {
-
-        ObservableList<Part> selectedParts = addPartTable.getItems();
-        Part chosenPart = addPartTable.getSelectionModel().getSelectedItem();
-        selectedParts.add(chosenPart);
-        partsContainedTable.setItems(selectedParts);
-        
+        Part part = addPartTable.getSelectionModel().getSelectedItem();
+        productParts.add(part);
+        populateCurrentPartsTable();
     }
     
 
@@ -179,13 +172,23 @@ public class AddProductController implements Initializable {
 
     @FXML
     void saveProductHandler(ActionEvent event) throws IOException, ValidationException {
-        String productID = productIDField.getText();
         String productName = productNameField.getText();
         String productInventory = productInventoryField.getText();
         String productPrice = productPriceField.getText();
         String productMin = productMinField.getText();
         String productMax = productMaxField.getText();
+       
+         if ("".equals(productInventory)) {
+            productInventory = "0";
+        }
         
+        int newProductID = 1;
+        for(Product p: Model.Inventory.getAllProducts()) {
+            if (p.getProductID() >= newProductID) {
+                newProductID = p.getProductID() + 1;
+            }
+        } 
+         
         Product newProduct = new Product();
         newProduct.setProductID(newProductID);
         newProduct.setName(productName);
@@ -193,28 +196,18 @@ public class AddProductController implements Initializable {
         newProduct.setInStock(Integer.parseInt(productInventory));
         newProduct.setMin(Integer.parseInt(productMin));
         newProduct.setMax(Integer.parseInt(productMax));
-        
-        if (currentModProduct != null) {
-            currentModProduct.removeAllAssociatedParts();
-        }
-        
-        for (Part h: productParts) {
-            newProduct.addAssociatedParts(h);
-        }
-        
+   
         try {
             newProduct.isValid();
-        
-        
-            if (currentModProduct == null) {
-                newProduct.setProductID(Inventory.getProductCount());
-                Inventory.addProduct(newProduct);
-            }
-            else {
-                newProduct.setProductID(currentModProduct.getProductID());
-                Inventory.updateProduct(newProduct);
-            }
             
+            if (newProduct.isValid() == true) {
+               for (Part h: productParts) 
+            newProduct.addAssociatedParts(h);
+            
+               Inventory.addProduct(newProduct);
+            }
+                
+
             Parent loader = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
             Scene scene = new Scene(loader);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -228,9 +221,10 @@ public class AddProductController implements Initializable {
                 alert.setHeaderText("Product not valid");
                 alert.setContentText(i.getMessage());
                 alert.showAndWait();
-        }   
-    }
+                    }   
+                    }
 
+       
     @FXML
     void searchPartsButtonHandler (ActionEvent event) throws IOException {
         String partsSearchIDString = searchPartsField.getText();

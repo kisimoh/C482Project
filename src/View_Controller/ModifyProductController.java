@@ -121,7 +121,7 @@ public class ModifyProductController implements Initializable {
     
     @FXML
     void addPartToProductHandler(ActionEvent event) throws IOException {
-        Part part = addPartTable.getSelectionModel().getSelectedItem();
+          Part part = addPartTable.getSelectionModel().getSelectedItem();
         productParts.add(part);
         populateCurrentPartsTable();
     }
@@ -178,12 +178,18 @@ public class ModifyProductController implements Initializable {
         String productMin = productMinField.getText();
         String productMax = productMaxField.getText();
         
+        if ("".equals(productInventory)) {
+            productInventory = "0";
+        }
+        
         Product newProduct = new Product();
         newProduct.setName(productName);
         newProduct.setPrice(Double.parseDouble(productPrice));
         newProduct.setInStock(Integer.parseInt(productInventory));
         newProduct.setMin(Integer.parseInt(productMin));
         newProduct.setMax(Integer.parseInt(productMax));
+        
+        
         
         if (currentModProduct != null) {
             currentModProduct.removeAllAssociatedParts();

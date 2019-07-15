@@ -81,7 +81,7 @@ public abstract class Part {
     public boolean isValid() throws ValidationException {
      
         if (getName().equals("")) {
-            throw new ValidationException("The name field is required. Please enter a part name."); 
+            throw new ValidationException("The name field is required. Please enter a name."); 
         }
         
         if (getInStock() < 0) {

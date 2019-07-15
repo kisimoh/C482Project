@@ -116,13 +116,13 @@ public class Product {
     
     public boolean isValid() throws ValidationException {
         
-        double totalPartsPrice = 0.00;
+        //double price = 0.00;
         
         for (Part c: getAssociatedParts()){
-            totalPartsPrice += c.getPrice();
+            price += c.getPrice();
         }
         
-        if (totalPartsPrice > getPrice()) {
+        if (price > getPrice()) {
             throw new ValidationException("Product price must be greater than total combined cost of all parts assigned to the product. Please validate prices.");
         }
         
